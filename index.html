@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -23,7 +23,7 @@
           },
           fontFamily: {
             serif: ['Cormorant', 'Georgia', 'serif'],
-            sans:  ['Montserrat', 'system-ui', 'sans-serif'],
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
           },
           maxWidth: { container: '1200px' },
         },
@@ -89,9 +89,16 @@
 
         <!-- Left column -->
         <div>
-          <h1 data-anim-heading data-delay="200" data-text="Where ambition finds\nits address."
-              class="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-4"
-              style="letter-spacing: -0.04em;">Where ambition finds<br/>its address.</h1>
+          <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-4"
+              style="letter-spacing: -0.04em;">
+            <span class="headline-rotator" data-interval="4500"
+                  data-phrases='["Where ambition finds|its address.","Building dreams,|securing wealth.","Premium property,|crafted around you."]'>
+              <span class="headline-phrase">Where ambition finds<br/>its address.</span>
+            </span>
+          </h1>
+
+          <!-- seven30-style progress indicator -->
+          <div class="headline-progress" aria-hidden="true"><span></span></div>
 
           <p class="fade-in text-base md:text-lg text-gray-300 mb-5 max-w-xl" data-delay="800" data-duration="1000">
             We source, craft and deliver exceptional property — defining where you live and invest.

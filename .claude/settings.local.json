@@ -13,7 +13,8 @@
       "mcp__visualize__show_widget",
       "mcp__Claude_Preview__preview_start",
       "Bash(python \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"luxury real estate corporate property listings premium professional\" --design-system -p \"G Horizon Enterprise\")",
-      "Bash(python3 \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"luxury real estate corporate property listings premium professional\" --design-system -p \"G Horizon Enterprise\")"
+      "Bash(python3 \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"luxury real estate corporate property listings premium professional\" --design-system -p \"G Horizon Enterprise\")",
+      "WebFetch(domain:seven30.co)"
     ]
   }
 }

@@ -249,6 +249,53 @@
     setTimeout(() => el.classList.add('in'), delay);
   });
 
+  /* ---- Hero headline rotator (seven30.co-style swap + progress bar) ----
+     <span class="headline-rotator" data-interval="4500"
+           data-phrases='["Line one|Line two", ...]'>
+       <span class="headline-phrase">…</span>
+     </span>
+     <div class="headline-progress"><span></span></div>
+     Use "|" inside a phrase to force a line break. */
+  const rotator = document.querySelector('.headline-rotator');
+  if (rotator) {
+    let phrases = [];
+    try { phrases = JSON.parse(rotator.dataset.phrases || '[]'); } catch (_) {}
+    const phraseEl = rotator.querySelector('.headline-phrase');
+    const progress = document.querySelector('.headline-progress');
+    const interval = parseInt(rotator.dataset.interval || '4500', 10);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const render = (txt) => { phraseEl.innerHTML = txt.split('|').join('<br/>'); };
+
+    if (phrases.length && phraseEl) {
+      const heading = rotator.closest('h1');
+      if (heading) heading.setAttribute('aria-label', phrases.map((p) => p.replace(/\|/g, ' ')).join('. '));
+      render(phrases[0]);
+
+      if (!reduce && phrases.length > 1) {
+        let i = 0;
+        const runProgress = () => {
+          if (!progress) return;
+          progress.classList.remove('run');
+          void progress.offsetWidth;           // force reflow to restart the animation
+          progress.style.setProperty('--hl-interval', interval + 'ms');
+          progress.classList.add('run');
+        };
+        runProgress();
+        setInterval(() => {
+          phraseEl.classList.add('swap-out');
+          setTimeout(() => {
+            i = (i + 1) % phrases.length;
+            render(phrases[i]);
+            phraseEl.classList.remove('swap-out');
+            phraseEl.classList.add('swap-in');
+            setTimeout(() => phraseEl.classList.remove('swap-in'), 650);
+            runProgress();
+          }, 450);                              // matches hlOut duration
+        }, interval);
+      }
+    }
+  }
+
   /* ---- Footer year ---- */
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();

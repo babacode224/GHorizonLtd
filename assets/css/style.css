@@ -23,7 +23,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Montserrat', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   color: var(--ink);
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
@@ -292,6 +292,42 @@ h1, h2, h3, .font-display { font-family: 'Cormorant', Georgia, serif; }
 /* FadeIn wrapper */
 .fade-in { opacity: 0; transition-property: opacity; transition-timing-function: ease; }
 .fade-in.in { opacity: 1; }
+
+/* ---- Hero headline rotator (seven30.co-style swap + progress bar) ---- */
+.headline-rotator { display: block; position: relative; }
+.headline-phrase  { display: block; will-change: transform, opacity; }
+.headline-phrase.swap-out { animation: hlOut .45s cubic-bezier(.4, 0, 1, 1) forwards; }
+.headline-phrase.swap-in  { animation: hlIn  .6s  cubic-bezier(.16, 1, .3, 1) forwards; }
+
+@keyframes hlOut { to   { opacity: 0; transform: translateY(-20px); } }
+@keyframes hlIn  { from { opacity: 0; transform: translateY(24px); }
+                   to   { opacity: 1; transform: translateY(0); } }
+
+/* Thin autoplay progress bar — mirrors seven30's slideIn keyframe
+   (background secondary -> white, width 0% -> 100%, ease-out) */
+.headline-progress {
+  position: relative;
+  width: 132px;
+  height: 2px;
+  margin-top: 1.5rem;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .18);
+  overflow: hidden;
+}
+.headline-progress > span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: block;
+  width: 0;
+  height: 100%;
+}
+.headline-progress.run > span {
+  animation: hlSlideIn var(--hl-interval, 4500ms) ease-out forwards;
+}
+@keyframes hlSlideIn {
+  0%   { background: var(--gold); width: 0%; }
+  100% { background: #fff;        width: 100%; }
+}
 
 /* GlassText (footer) reveal — scale + fade, replaces motion/react whileInView */
 .glass-reveal {
