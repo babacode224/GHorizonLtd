@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Next.js
+.next/
+out/
+build/
+**/.next/
+
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+
+# Uploads / local storage
+ListingsPipeline/backend/uploads/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Claude local skill cache (large, not part of the app)
+.claude/skills/

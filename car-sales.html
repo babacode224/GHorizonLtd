@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Sales — Coming Soon | G Horizon Enterprise Limited</title>
+  <meta name="description" content="The G Horizon Car Sales division is coming soon — curated premium vehicles with the same trusted service." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { navy:{DEFAULT:'#1e3a8a',deep:'#122a6b',ink:'#0c1f52'}, sky:{DEFAULT:'#3b82f6',light:'#60a5fa',tint:'#eff4ff'}, gold:{DEFAULT:'#c9a24b',soft:'#e7d6ac'}, mist:'#f3f4f6' },
+      fontFamily: { serif:['Cormorant','Georgia','serif'], sans:['Montserrat','system-ui','sans-serif'] },
+      maxWidth: { container:'1200px' } } } };
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="nav" class="nav-shell nav-scrolled fixed top-0 inset-x-0 z-50">
+    <div class="max-w-container mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-[72px]">
+        <a href="index.html" class="flex items-center gap-3 shrink-0">
+          <span class="grid place-items-center w-10 h-10 rounded-sm bg-navy text-white font-serif text-lg leading-none">G</span>
+          <span class="leading-tight"><span class="block font-serif text-[1.05rem] font-semibold text-navy">G Horizon</span><span class="block text-[.62rem] tracking-[.22em] uppercase text-gold font-semibold">Enterprise Ltd</span></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-7">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="products.html" class="nav-link">Products</a>
+          <a href="about.html" class="nav-link">About Us</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="contact.html" class="nav-link">Consulting</a>
+          <a href="faq.html" class="nav-link">FAQ</a>
+          <a href="car-sales.html" class="nav-link active flex items-center gap-1.5">Car Sales <span class="pill">Soon</span></a>
+        </nav>
+        <div class="hidden lg:flex items-center gap-3"><a href="contact.html" class="btn btn-primary">Book a Consultation</a></div>
+        <button id="burger" aria-label="Open menu" aria-expanded="false" class="lg:hidden p-2 -mr-2 text-navy"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-mist">
+      <nav class="px-5 py-4 flex flex-col gap-1">
+        <a href="index.html" class="py-2.5 font-medium text-ink">Home</a>
+        <a href="products.html" class="py-2.5 font-medium text-ink">Products</a>
+        <a href="about.html" class="py-2.5 font-medium text-ink">About Us</a>
+        <a href="services.html" class="py-2.5 font-medium text-ink">Services</a>
+        <a href="contact.html" class="py-2.5 font-medium text-ink">Consulting / Contact</a>
+        <a href="faq.html" class="py-2.5 font-medium text-ink">FAQ</a>
+        <a href="car-sales.html" class="py-2.5 font-medium text-navy flex items-center gap-2">Car Sales <span class="pill">Soon</span></a>
+        <a href="contact.html" class="btn btn-primary mt-3">Book a Consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== COMING SOON HERO ===== -->
+  <section class="relative min-h-[100svh] flex items-center">
+    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80" alt="Luxury car in dramatic lighting" class="absolute inset-0 w-full h-full object-cover" />
+    <div class="absolute inset-0 hero-overlay"></div>
+    <div class="relative max-w-container mx-auto px-5 lg:px-8 w-full pt-28 pb-20 text-center text-white">
+      <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/90 text-navy-ink text-xs font-bold uppercase tracking-[.18em] mb-8">Coming Soon</span>
+      <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.05] mb-6 max-w-3xl mx-auto">A new road,<br/>same <em class="text-gold not-italic">trusted name.</em></h1>
+      <p class="text-lg text-white/85 max-w-xl mx-auto mb-10">The G Horizon Car Sales division is on its way — curated premium vehicles, full specifications and the seamless inquiry experience you know from our real estate division.</p>
+
+      <!-- Notify form -->
+      <form data-demo class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+        <label for="cs-email" class="sr-only">Email address</label>
+        <input id="cs-email" type="email" required placeholder="Your email address" class="field flex-1 !bg-white/10 !border-white/25 !text-white placeholder:text-white/55" />
+        <button type="submit" class="btn btn-blue shrink-0">Notify Me</button>
+      </form>
+      <p data-form-note class="hidden text-sm text-gold-soft mt-4">You're on the list — we'll let you know the moment we launch.</p>
+    </div>
+  </section>
+
+  <!-- ===== WHAT TO EXPECT ===== -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-container mx-auto px-5 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal"><span class="eyebrow center justify-center mb-4">Phase 2</span><h2 class="font-serif text-4xl lg:text-5xl font-semibold text-navy-ink leading-tight">What to expect</h2></div>
+      <div class="grid md:grid-cols-3 gap-7">
+        <div class="reveal p-8 border border-mist rounded-md text-center">
+          <div class="w-12 h-12 mx-auto grid place-items-center rounded-sm bg-sky-tint text-navy mb-6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 13l1.5-4.5A2 2 0 018.4 7h7.2a2 2 0 011.9 1.5L19 13M5 13h14v4H5zM7 17v2M17 17v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="15" r="0.6"/><circle cx="16" cy="15" r="0.6"/></svg></div>
+          <h3 class="font-serif text-xl font-semibold text-navy mb-3">Curated Vehicles</h3>
+          <p class="text-muted leading-relaxed">A handpicked selection of premium and luxury cars, each inspected and verified.</p>
+        </div>
+        <div class="reveal p-8 border border-mist rounded-md text-center">
+          <div class="w-12 h-12 mx-auto grid place-items-center rounded-sm bg-sky-tint text-navy mb-6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 17H7A2 2 0 015 15V5a2 2 0 012-2h7l5 5v7a2 2 0 01-2 2h-2M9 13h6M9 9h3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 class="font-serif text-xl font-semibold text-navy mb-3">Full Specifications</h3>
+          <p class="text-muted leading-relaxed">Detailed specs, history and pricing — complete transparency on every listing.</p>
+        </div>
+        <div class="reveal p-8 border border-mist rounded-md text-center">
+          <div class="w-12 h-12 mx-auto grid place-items-center rounded-sm bg-sky-tint text-navy mb-6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 class="font-serif text-xl font-semibold text-navy mb-3">Easy Inquiries</h3>
+          <p class="text-muted leading-relaxed">The same quick-inquiry and appointment tools you use for our properties.</p>
+        </div>
+      </div>
+      <div class="text-center mt-14 reveal">
+        <p class="text-muted mb-6">In the meantime, explore our real estate portfolio.</p>
+        <a href="products.html" class="btn btn-primary">Browse Properties</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-[#F9F9FB] overflow-hidden pt-16 md:pt-24 pb-0 px-4">
+    <div class="w-full flex flex-col items-center gap-0">
+
+      <!-- ===== Footer Card ===== -->
+      <div class="w-full max-w-6xl mx-auto">
+        <div class="bg-[#E9EBEE] rounded-[48px] border border-slate-200 shadow-sm overflow-hidden">
+
+          <!-- Inner white box -->
+          <div class="bg-white rounded-[40px] m-2 shadow-sm">
+            <div class="p-8 md:p-10 lg:p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+
+              <!-- Brand info -->
+              <div class="lg:col-span-2 space-y-8">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-8 h-8 bg-[#1e3a8a] rounded-[8px] flex items-center justify-center">
+                    <span class="font-serif font-semibold text-white text-lg leading-none">G</span>
+                  </span>
+                  <span class="text-[26px] font-bold tracking-tight text-[#0F172A]">G Horizon</span>
+                </div>
+                <p class="text-[#64748B] leading-relaxed text-[16px] font-normal max-w-[320px]">Premium real estate sourcing, sales and bespoke consultancy designed to elevate where you live, work and invest.</p>
+                <div class="flex items-center gap-3">
+                  <a href="#" aria-label="LinkedIn" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  </a>
+                  <a href="#" aria-label="Twitter" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                  </a>
+                  <a href="#" aria-label="Instagram" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Explore -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Explore</h4>
+                <ul class="space-y-4">
+                  <li><a href="products.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Properties</a></li>
+                  <li><a href="services.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Services</a></li>
+                  <li><a href="car-sales.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Car Sales</a></li>
+                  <li><a href="faq.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">FAQ</a></li>
+                </ul>
+              </div>
+
+              <!-- Company -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Company</h4>
+                <ul class="space-y-4">
+                  <li><a href="about.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">About Us</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Careers</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Partners</a></li>
+                </ul>
+              </div>
+
+              <!-- Connect -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Connect</h4>
+                <ul class="space-y-4">
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Contact Us</a></li>
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Book a Visit</a></li>
+                  <li><a href="mailto:hello@ghorizon.com" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">hello@ghorizon.com</a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom legal bar -->
+          <div class="px-6 sm:px-12 md:px-16 lg:px-20 py-5 flex flex-col md:flex-row justify-between items-center gap-6 text-[15px]">
+            <p class="text-[#64748B] font-medium">&copy; <span id="year">2026</span> G Horizon Enterprise Limited. All rights reserved.</p>
+            <div class="flex gap-8 text-[#64748B] font-medium items-center">
+              <a href="#" class="hover:text-[#1E293B] transition-colors">Legal Center</a>
+              <div class="w-[1px] h-4 bg-slate-300"></div>
+              <a href="#" class="hover:text-[#1E293B] transition-colors">User Agreement</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== Giant Glass Text ===== -->
+      <div class="relative w-full flex items-center justify-center select-none pt-0 overflow-hidden">
+        <svg class="absolute w-0 h-0" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.25" result="outer-shadow"/>
+              <feComponentTransfer in="SourceAlpha" result="alpha"><feFuncA type="linear" slope="1" /></feComponentTransfer>
+              <feOffset in="alpha" dx="0" dy="4" result="offset-white" />
+              <feGaussianBlur in="offset-white" stdDeviation="4" result="blur-white" />
+              <feComposite in="alpha" in2="blur-white" operator="out" result="inner-white-mask" />
+              <feFlood flood-color="#ffffff" flood-opacity="0.25" result="white-fill" />
+              <feComposite in="white-fill" in2="inner-white-mask" operator="in" result="inner-white-final" />
+              <feGaussianBlur in="alpha" stdDeviation="6" result="blur-black" />
+              <feComposite in="alpha" in2="blur-black" operator="out" result="inner-black-mask" />
+              <feFlood flood-color="#000000" flood-opacity="0.25" result="black-fill" />
+              <feComposite in="black-fill" in2="inner-black-mask" operator="in" result="inner-black-final" />
+              <feMerge>
+                <feMergeNode in="outer-shadow" />
+                <feMergeNode in="SourceGraphic" />
+                <feMergeNode in="inner-white-final" />
+                <feMergeNode in="inner-black-final" />
+              </feMerge>
+            </filter>
+          </defs>
+        </svg>
+        <div class="relative reveal glass-reveal">
+          <h1 class="text-[min(17vw,220px)] font-sans font-bold tracking-tight leading-none select-none text-white px-4 whitespace-nowrap" style="filter: url(#glass-effect);">G Horizon</h1>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

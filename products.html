@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Properties — G Horizon Enterprise Limited</title>
+  <meta name="description" content="Browse premium houses, land plots and commercial properties. Filter by category, location and price." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { navy:{DEFAULT:'#1e3a8a',deep:'#122a6b',ink:'#0c1f52'}, sky:{DEFAULT:'#3b82f6',light:'#60a5fa',tint:'#eff4ff'}, gold:{DEFAULT:'#c9a24b',soft:'#e7d6ac'}, mist:'#f3f4f6' },
+      fontFamily: { serif:['Cormorant','Georgia','serif'], sans:['Montserrat','system-ui','sans-serif'] },
+      maxWidth: { container:'1200px' } } } };
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="nav" class="nav-shell nav-scrolled fixed top-0 inset-x-0 z-50">
+    <div class="max-w-container mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-[72px]">
+        <a href="index.html" class="flex items-center gap-3 shrink-0">
+          <span class="grid place-items-center w-10 h-10 rounded-sm bg-navy text-white font-serif text-lg leading-none">G</span>
+          <span class="leading-tight">
+            <span class="block font-serif text-[1.05rem] font-semibold text-navy">G Horizon</span>
+            <span class="block text-[.62rem] tracking-[.22em] uppercase text-gold font-semibold">Enterprise Ltd</span>
+          </span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-7">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="products.html" class="nav-link active">Products</a>
+          <a href="about.html" class="nav-link">About Us</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="contact.html" class="nav-link">Consulting</a>
+          <a href="faq.html" class="nav-link">FAQ</a>
+          <a href="car-sales.html" class="nav-link flex items-center gap-1.5">Car Sales <span class="pill">Soon</span></a>
+        </nav>
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="contact.html" class="btn btn-primary">Book a Consultation</a>
+        </div>
+        <button id="burger" aria-label="Open menu" aria-expanded="false" class="lg:hidden p-2 -mr-2 text-navy">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-mist">
+      <nav class="px-5 py-4 flex flex-col gap-1">
+        <a href="index.html" class="py-2.5 font-medium text-ink">Home</a>
+        <a href="products.html" class="py-2.5 font-medium text-navy">Products</a>
+        <a href="about.html" class="py-2.5 font-medium text-ink">About Us</a>
+        <a href="services.html" class="py-2.5 font-medium text-ink">Services</a>
+        <a href="contact.html" class="py-2.5 font-medium text-ink">Consulting / Contact</a>
+        <a href="faq.html" class="py-2.5 font-medium text-ink">FAQ</a>
+        <a href="car-sales.html" class="py-2.5 font-medium text-ink flex items-center gap-2">Car Sales <span class="pill">Soon</span></a>
+        <a href="contact.html" class="btn btn-primary mt-3">Book a Consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="pt-[72px] bg-navy-ink text-white">
+    <div class="max-w-container mx-auto px-5 lg:px-8 py-16 lg:py-20">
+      <span class="eyebrow !text-gold-soft mb-4">Our Portfolio</span>
+      <h1 class="font-serif text-4xl lg:text-6xl font-semibold leading-tight mb-4">Find your next address</h1>
+      <p class="text-white/80 max-w-xl text-lg">A curated database of houses, land plots and commercial properties — each verified, valued and ready to view.</p>
+    </div>
+  </section>
+
+  <!-- ===== FILTER BAR ===== -->
+  <section class="bg-white border-b border-mist sticky top-[72px] z-40">
+    <div class="max-w-container mx-auto px-5 lg:px-8 py-5">
+      <div class="flex flex-col lg:flex-row lg:items-center gap-4 lg:justify-between">
+        <!-- category chips -->
+        <div class="flex flex-wrap gap-2.5">
+          <button class="chip chip-active" data-filter="all">All</button>
+          <button class="chip" data-filter="house">Houses</button>
+          <button class="chip" data-filter="land">Land Plots</button>
+          <button class="chip" data-filter="commercial">Commercial</button>
+        </div>
+        <!-- selects -->
+        <div class="flex flex-wrap gap-3">
+          <div>
+            <label for="filter-location" class="sr-only">Location</label>
+            <select id="filter-location" class="field !py-2.5 !pr-9 text-sm">
+              <option value="all">All Locations</option>
+              <option value="lagos">Lagos</option>
+              <option value="abuja">Abuja</option>
+              <option value="port-harcourt">Port Harcourt</option>
+            </select>
+          </div>
+          <div>
+            <label for="filter-price" class="sr-only">Price range</label>
+            <select id="filter-price" class="field !py-2.5 !pr-9 text-sm">
+              <option value="all">Any Price</option>
+              <option value="lt100">Under ₦100M</option>
+              <option value="100-300">₦100M – ₦300M</option>
+              <option value="gt300">Above ₦300M</option>
+            </select>
+          </div>
+          <div>
+            <label for="filter-sort" class="sr-only">Sort</label>
+            <select id="filter-sort" class="field !py-2.5 !pr-9 text-sm">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm text-muted mt-4"><span id="result-count">9</span> properties available</p>
+    </div>
+  </section>
+
+  <!-- ===== GRID ===== -->
+  <section class="py-12 lg:py-16 bg-mist">
+    <div class="max-w-container mx-auto px-5 lg:px-8">
+      <div id="property-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+
+        <!-- 1 -->
+        <article class="prop-card" data-category="house" data-location="lagos" data-price="450000000" data-index="1">
+          <div class="prop-media relative aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80" alt="The Maple Residence villa" loading="lazy" class="w-full h-full object-cover" />
+            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
+          </div>
+          <div class="p-6">
+            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">House</div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">The Maple Residence</h3>
+            <p class="text-sm text-muted mb-4">Banana Island, Lagos</p>
+            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
+              <span>4 Beds</span><span>5 Baths</span><span>620 m²</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-serif text-2xl font-semibold text-navy">₦450M</span>
+              <button data-inquire="The Maple Residence" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="prop-card" data-category="land" data-location="lagos" data-price="75000000" data-index="2">
+          <div class="prop-media relative aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80" alt="Horizon Gardens land plot" loading="lazy" class="w-full h-full object-cover" />
+            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
+          </div>
+          <div class="p-6">
+            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Land Plot</div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Horizon Gardens Estate</h3>
+            <p class="text-sm text-muted mb-4">Ibeju-Lekki, Lagos</p>
+            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
+              <span>1,000 m²</span><span>C-of-O Title</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-serif text-2xl font-semibold text-navy">₦75M</span>
+              <button data-inquire="Horizon Gardens Estate" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="prop-card" data-category="commercial" data-location="abuja" data-price="1200000000" data-index="3">
+          <div class="prop-media relative aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80" alt="Meridian Office Plaza tower" loading="lazy" class="w-full h-full object-cover" />
+            <span class="badge badge-soon absolute top-4 left-4">Coming Soon</span>
+          </div>
+          <div class="p-6">
+            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Commercial</div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Meridian Office Plaza</h3>
+            <p class="text-sm text-muted mb-4">Central Business District, Abuja</p>
+            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
+              <span>8 Floors</span><span>3,200 m²</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-serif text-2xl font-semibold text-navy">₦1.2B</span>
+              <button data-inquire="Meridian Office Plaza" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="prop-card" data-category="house" data-location="abuja" data-price="280000000" data-index="4">
+          <div class="prop-media relative aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80" alt="Cedar Court family home" loading="lazy" class="w-full h-full object-cover" />
+            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
+          </div>
+          <div class="p-6">
+            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">House</div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Cedar Court</h3>
+            <p class="text-sm text-muted mb-4">Maitama, Abuja</p>
+            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
+              <span>5 Beds</span><span>6 Baths</span><span>740 m²</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-serif text-2xl font-semibold text-navy">₦280M</span>
+              <button data-inquire="Cedar Court" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="prop-card" data-category="house" data-location="lagos" data-price="95000000" data-index="5">
+          <div class="prop-media relative aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=80" alt="The Aubrey townhouse" loading="lazy" class="w-full h-full object-cover" />
+            <span class="badge badge-sold absolute top-4 left-4">Sold</span>
+          </div>
+          <div class="p-6">
+            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">House</div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">The Aubrey Townhouse</h3>
+            <p class="text-sm text-muted mb-4">Ikoyi, Lagos</p>
+            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
+              <span>3 Beds</span><span>4 Baths</span><span>410 m²</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-serif text-2xl font-semibold text-navy">₦95M</span>
+              <button data-inquire="The Aubrey Townhouse" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="prop-card" data-category="land" data-location="port-harcourt" data-price="40000000" data-index="6">
+          <div class="prop-media relative aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?auto=format&fit=crop&w=900&q=80" alt="Riverside land parcel" loading="lazy" class="w-full h-full object-cover" />
+            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
+          </div>
+          <div class="p-6">
+            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Land Plot</div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Riverside Parcel</h3>
+            <p class="text-sm text-muted mb-4">GRA Phase 2, Port Harcourt</p>
+            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
+              <span>800 m²</span><span>Deed of Assignment</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-serif text-2xl font-semibold text-navy">₦40M</span>
+              <button data-inquire="Riverside Parcel" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="prop-card" data-category="commercial" data-location="lagos" data-price="320000000" data-index="7">
+          <div class="prop-media relative aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Retail and office space interior" loading="lazy" class="w-full h-full object-cover" />
+            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
+          </div>
+          <div class="p-6">
+            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Commercial</div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Vantage Retail Suites</h3>
+            <p class="text-sm text-muted mb-4">Victoria Island, Lagos</p>
+            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
+              <span>1,100 m²</span><span>12 Units</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-serif text-2xl font-semibold text-navy">₦320M</span>
+              <button data-inquire="Vantage Retail Suites" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="prop-card" data-category="house" data-location="lagos" data-price="180000000" data-index="8">
+          <div class="prop-media relative aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=900&q=80" alt="The Serenade duplex" loading="lazy" class="w-full h-full object-cover" />
+            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
+          </div>
+          <div class="p-6">
+            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">House</div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">The Serenade Duplex</h3>
+            <p class="text-sm text-muted mb-4">Lekki Phase 1, Lagos</p>
+            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
+              <span>4 Beds</span><span>5 Baths</span><span>520 m²</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-serif text-2xl font-semibold text-navy">₦180M</span>
+              <button data-inquire="The Serenade Duplex" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="prop-card" data-category="commercial" data-location="abuja" data-price="60000000" data-index="9">
+          <div class="prop-media relative aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=900&q=80" alt="Warehouse logistics space" loading="lazy" class="w-full h-full object-cover" />
+            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
+          </div>
+          <div class="p-6">
+            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Commercial</div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Logix Warehouse Bay</h3>
+            <p class="text-sm text-muted mb-4">Idu Industrial, Abuja</p>
+            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
+              <span>2,400 m²</span><span>Loading Dock</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-serif text-2xl font-semibold text-navy">₦60M</span>
+              <button data-inquire="Logix Warehouse Bay" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- empty state -->
+      <div id="empty-state" class="hidden text-center py-20">
+        <div class="w-14 h-14 mx-auto grid place-items-center rounded-full bg-white text-muted mb-4">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-serif text-2xl text-navy mb-2">No properties match your filters</h3>
+        <p class="text-muted">Try widening your location or price range.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-[#F9F9FB] overflow-hidden pt-16 md:pt-24 pb-0 px-4">
+    <div class="w-full flex flex-col items-center gap-0">
+
+      <!-- ===== Footer Card ===== -->
+      <div class="w-full max-w-6xl mx-auto">
+        <div class="bg-[#E9EBEE] rounded-[48px] border border-slate-200 shadow-sm overflow-hidden">
+
+          <!-- Inner white box -->
+          <div class="bg-white rounded-[40px] m-2 shadow-sm">
+            <div class="p-8 md:p-10 lg:p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+
+              <!-- Brand info -->
+              <div class="lg:col-span-2 space-y-8">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-8 h-8 bg-[#1e3a8a] rounded-[8px] flex items-center justify-center">
+                    <span class="font-serif font-semibold text-white text-lg leading-none">G</span>
+                  </span>
+                  <span class="text-[26px] font-bold tracking-tight text-[#0F172A]">G Horizon</span>
+                </div>
+                <p class="text-[#64748B] leading-relaxed text-[16px] font-normal max-w-[320px]">Premium real estate sourcing, sales and bespoke consultancy designed to elevate where you live, work and invest.</p>
+                <div class="flex items-center gap-3">
+                  <a href="#" aria-label="LinkedIn" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  </a>
+                  <a href="#" aria-label="Twitter" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                  </a>
+                  <a href="#" aria-label="Instagram" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Explore -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Explore</h4>
+                <ul class="space-y-4">
+                  <li><a href="products.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Properties</a></li>
+                  <li><a href="services.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Services</a></li>
+                  <li><a href="car-sales.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Car Sales</a></li>
+                  <li><a href="faq.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">FAQ</a></li>
+                </ul>
+              </div>
+
+              <!-- Company -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Company</h4>
+                <ul class="space-y-4">
+                  <li><a href="about.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">About Us</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Careers</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Partners</a></li>
+                </ul>
+              </div>
+
+              <!-- Connect -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Connect</h4>
+                <ul class="space-y-4">
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Contact Us</a></li>
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Book a Visit</a></li>
+                  <li><a href="mailto:hello@ghorizon.com" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">hello@ghorizon.com</a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom legal bar -->
+          <div class="px-6 sm:px-12 md:px-16 lg:px-20 py-5 flex flex-col md:flex-row justify-between items-center gap-6 text-[15px]">
+            <p class="text-[#64748B] font-medium">&copy; <span id="year">2026</span> G Horizon Enterprise Limited. All rights reserved.</p>
+            <div class="flex gap-8 text-[#64748B] font-medium items-center">
+              <a href="#" class="hover:text-[#1E293B] transition-colors">Legal Center</a>
+              <div class="w-[1px] h-4 bg-slate-300"></div>
+              <a href="#" class="hover:text-[#1E293B] transition-colors">User Agreement</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== Giant Glass Text ===== -->
+      <div class="relative w-full flex items-center justify-center select-none pt-0 overflow-hidden">
+        <svg class="absolute w-0 h-0" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.25" result="outer-shadow"/>
+              <feComponentTransfer in="SourceAlpha" result="alpha"><feFuncA type="linear" slope="1" /></feComponentTransfer>
+              <feOffset in="alpha" dx="0" dy="4" result="offset-white" />
+              <feGaussianBlur in="offset-white" stdDeviation="4" result="blur-white" />
+              <feComposite in="alpha" in2="blur-white" operator="out" result="inner-white-mask" />
+              <feFlood flood-color="#ffffff" flood-opacity="0.25" result="white-fill" />
+              <feComposite in="white-fill" in2="inner-white-mask" operator="in" result="inner-white-final" />
+              <feGaussianBlur in="alpha" stdDeviation="6" result="blur-black" />
+              <feComposite in="alpha" in2="blur-black" operator="out" result="inner-black-mask" />
+              <feFlood flood-color="#000000" flood-opacity="0.25" result="black-fill" />
+              <feComposite in="black-fill" in2="inner-black-mask" operator="in" result="inner-black-final" />
+              <feMerge>
+                <feMergeNode in="outer-shadow" />
+                <feMergeNode in="SourceGraphic" />
+                <feMergeNode in="inner-white-final" />
+                <feMergeNode in="inner-black-final" />
+              </feMerge>
+            </filter>
+          </defs>
+        </svg>
+        <div class="relative reveal glass-reveal">
+          <h1 class="text-[min(17vw,220px)] font-sans font-bold tracking-tight leading-none select-none text-white px-4 whitespace-nowrap" style="filter: url(#glass-effect);">G Horizon</h1>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ===== INQUIRY MODAL ===== -->
+  <div id="inquiry-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="flex items-start justify-between p-6 border-b border-mist">
+        <div>
+          <h3 id="modal-title" class="font-serif text-xl font-semibold text-navy">Quick Inquiry</h3>
+          <p class="text-sm text-muted mt-1">Re: <span id="modal-prop-name" class="font-medium text-ink">this property</span></p>
+        </div>
+        <button data-close aria-label="Close" class="p-2 -m-2 text-muted hover:text-navy">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <form data-demo class="p-6 space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="field-label" for="m-name">Full name</label><input id="m-name" class="field" required /></div>
+          <div><label class="field-label" for="m-phone">Phone</label><input id="m-phone" type="tel" class="field" required /></div>
+        </div>
+        <div><label class="field-label" for="m-email">Email</label><input id="m-email" type="email" class="field" required /></div>
+        <div><label class="field-label" for="m-msg">Message</label><textarea id="m-msg" rows="3" class="field" placeholder="I'd like to know more about this property…"></textarea></div>
+        <button type="submit" class="btn btn-primary w-full">Send Inquiry</button>
+        <p data-form-note class="hidden text-sm text-green-600 text-center">Inquiry sent — an advisor will contact you shortly.</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

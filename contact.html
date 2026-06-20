@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consulting &amp; Contact — G Horizon Enterprise Limited</title>
+  <meta name="description" content="Submit a buy, sell or consultation request. Upload documents and book a property inspection." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { navy:{DEFAULT:'#1e3a8a',deep:'#122a6b',ink:'#0c1f52'}, sky:{DEFAULT:'#3b82f6',light:'#60a5fa',tint:'#eff4ff'}, gold:{DEFAULT:'#c9a24b',soft:'#e7d6ac'}, mist:'#f3f4f6' },
+      fontFamily: { serif:['Cormorant','Georgia','serif'], sans:['Montserrat','system-ui','sans-serif'] },
+      maxWidth: { container:'1200px' } } } };
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="nav" class="nav-shell nav-scrolled fixed top-0 inset-x-0 z-50">
+    <div class="max-w-container mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-[72px]">
+        <a href="index.html" class="flex items-center gap-3 shrink-0">
+          <span class="grid place-items-center w-10 h-10 rounded-sm bg-navy text-white font-serif text-lg leading-none">G</span>
+          <span class="leading-tight"><span class="block font-serif text-[1.05rem] font-semibold text-navy">G Horizon</span><span class="block text-[.62rem] tracking-[.22em] uppercase text-gold font-semibold">Enterprise Ltd</span></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-7">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="products.html" class="nav-link">Products</a>
+          <a href="about.html" class="nav-link">About Us</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="contact.html" class="nav-link active">Consulting</a>
+          <a href="faq.html" class="nav-link">FAQ</a>
+          <a href="car-sales.html" class="nav-link flex items-center gap-1.5">Car Sales <span class="pill">Soon</span></a>
+        </nav>
+        <div class="hidden lg:flex items-center gap-3"><a href="contact.html" class="btn btn-primary">Book a Consultation</a></div>
+        <button id="burger" aria-label="Open menu" aria-expanded="false" class="lg:hidden p-2 -mr-2 text-navy"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-mist">
+      <nav class="px-5 py-4 flex flex-col gap-1">
+        <a href="index.html" class="py-2.5 font-medium text-ink">Home</a>
+        <a href="products.html" class="py-2.5 font-medium text-ink">Products</a>
+        <a href="about.html" class="py-2.5 font-medium text-ink">About Us</a>
+        <a href="services.html" class="py-2.5 font-medium text-ink">Services</a>
+        <a href="contact.html" class="py-2.5 font-medium text-navy">Consulting / Contact</a>
+        <a href="faq.html" class="py-2.5 font-medium text-ink">FAQ</a>
+        <a href="car-sales.html" class="py-2.5 font-medium text-ink flex items-center gap-2">Car Sales <span class="pill">Soon</span></a>
+        <a href="contact.html" class="btn btn-primary mt-3">Book a Consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="pt-[72px] bg-navy-ink text-white">
+    <div class="max-w-container mx-auto px-5 lg:px-8 py-16 lg:py-20">
+      <span class="eyebrow !text-gold-soft mb-4">Let's Talk</span>
+      <h1 class="font-serif text-4xl lg:text-6xl font-semibold leading-tight mb-4 max-w-2xl">Consulting &amp; Contact</h1>
+      <p class="text-white/80 max-w-xl text-lg">Buying, selling or simply exploring? Tell us what you need and book an inspection — physical or virtual.</p>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT CARDS ===== -->
+  <section class="bg-white border-b border-mist">
+    <div class="max-w-container mx-auto px-5 lg:px-8 py-12 grid sm:grid-cols-3 gap-7">
+      <div class="flex items-start gap-4">
+        <span class="w-11 h-11 grid place-items-center rounded-sm bg-sky-tint text-navy shrink-0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-5.7-7-11a7 7 0 0114 0c0 5.3-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+        <div><h3 class="font-semibold text-navy mb-1">Visit Us</h3><p class="text-sm text-muted leading-relaxed">14 Admiralty Way, Lekki Phase 1, Lagos, Nigeria</p></div>
+      </div>
+      <div class="flex items-start gap-4">
+        <span class="w-11 h-11 grid place-items-center rounded-sm bg-sky-tint text-navy shrink-0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><h3 class="font-semibold text-navy mb-1">Call Us</h3><p class="text-sm text-muted leading-relaxed"><a href="tel:+2348000000000" class="hover:text-navy">+234 800 000 0000</a><br/>Mon–Sat, 9am–6pm</p></div>
+      </div>
+      <div class="flex items-start gap-4">
+        <span class="w-11 h-11 grid place-items-center rounded-sm bg-sky-tint text-navy shrink-0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><h3 class="font-semibold text-navy mb-1">Email Us</h3><p class="text-sm text-muted leading-relaxed"><a href="mailto:hello@ghorizon.com" class="hover:text-navy">hello@ghorizon.com</a><br/>We reply within 24 hours</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FORM + SCHEDULER ===== -->
+  <section class="py-16 lg:py-24 bg-mist">
+    <div class="max-w-container mx-auto px-5 lg:px-8 grid lg:grid-cols-5 gap-8">
+
+      <!-- Form -->
+      <div class="lg:col-span-3 bg-white rounded-md border border-mist p-7 lg:p-10 reveal">
+        <h2 class="font-serif text-3xl font-semibold text-navy mb-2">Send us your request</h2>
+        <p class="text-muted mb-8">Select what you need and share the details — the more we know, the better we can help.</p>
+
+        <form data-demo class="space-y-6">
+          <!-- inquiry type -->
+          <div>
+            <span class="field-label">I would like to</span>
+            <div class="grid grid-cols-3 gap-3">
+              <label class="cursor-pointer">
+                <input type="radio" name="intent" value="buy" class="peer sr-only" checked />
+                <span class="block text-center text-sm font-semibold py-3 rounded-sm border border-mist peer-checked:bg-navy peer-checked:text-white peer-checked:border-navy transition-colors">Buy</span>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="intent" value="sell" class="peer sr-only" />
+                <span class="block text-center text-sm font-semibold py-3 rounded-sm border border-mist peer-checked:bg-navy peer-checked:text-white peer-checked:border-navy transition-colors">Sell</span>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="intent" value="consult" class="peer sr-only" />
+                <span class="block text-center text-sm font-semibold py-3 rounded-sm border border-mist peer-checked:bg-navy peer-checked:text-white peer-checked:border-navy transition-colors">Consult</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div><label class="field-label" for="c-name">Full name</label><input id="c-name" class="field" required /></div>
+            <div><label class="field-label" for="c-phone">Phone</label><input id="c-phone" type="tel" class="field" required /></div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div><label class="field-label" for="c-email">Email</label><input id="c-email" type="email" class="field" required /></div>
+            <div>
+              <label class="field-label" for="c-interest">Property interest</label>
+              <select id="c-interest" class="field">
+                <option>House</option><option>Land Plot</option><option>Commercial</option><option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+
+          <div><label class="field-label" for="c-msg">Describe your request</label><textarea id="c-msg" rows="4" class="field" placeholder="e.g. Looking for a 4-bedroom home in Lekki under ₦200M, or I'd like to list my commercial property…" required></textarea></div>
+
+          <!-- file upload -->
+          <div>
+            <span class="field-label">Upload documents <span class="font-normal normal-case text-muted">(optional)</span></span>
+            <label for="c-file" class="flex items-center gap-4 p-4 border border-dashed border-sky/50 rounded-sm bg-sky-tint/40 cursor-pointer hover:bg-sky-tint transition-colors">
+              <span class="w-10 h-10 grid place-items-center rounded-sm bg-white text-navy shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V4m0 0L8 8m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span><span class="block text-sm font-semibold text-navy">Click to upload</span><span data-file-for="c-file" class="block text-xs text-muted">PDF, JPG, PNG or DOC — up to 5 MB</span></span>
+              <input id="c-file" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple class="sr-only" />
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-full">Submit Request</button>
+          <p data-form-note class="hidden text-sm text-green-600 text-center">Request received — a G Horizon advisor will be in touch within 24 hours.</p>
+        </form>
+      </div>
+
+      <!-- Scheduler -->
+      <div class="lg:col-span-2 space-y-8">
+        <div class="bg-navy-ink text-white rounded-md p-7 lg:p-8 reveal">
+          <div class="divider-gold mb-5"></div>
+          <h2 class="font-serif text-2xl font-semibold mb-2">Book an inspection</h2>
+          <p class="text-white/75 text-sm mb-6">Reserve a physical or virtual viewing. We'll confirm by email.</p>
+
+          <form data-demo class="space-y-5">
+            <div>
+              <label class="field-label !text-white/70" for="a-date">Preferred date</label>
+              <input id="a-date" type="date" class="field !bg-white/10 !border-white/20 !text-white" required />
+            </div>
+            <div>
+              <span class="field-label !text-white/70">Available time slots</span>
+              <div class="slot-group grid grid-cols-3 gap-2.5">
+                <button type="button" class="slot !bg-white/5 !border-white/15 !text-white/80" data-slot="09:00">09:00</button>
+                <button type="button" class="slot !bg-white/5 !border-white/15 !text-white/80" data-slot="11:00">11:00</button>
+                <button type="button" class="slot !bg-white/5 !border-white/15 !text-white/80" data-slot="13:00">13:00</button>
+                <button type="button" class="slot !bg-white/5 !border-white/15 !text-white/80" data-slot="15:00">15:00</button>
+                <button type="button" class="slot !bg-white/5 !border-white/15 !text-white/80" data-slot="16:30">16:30</button>
+                <button type="button" class="slot !bg-white/5 !border-white/15 !text-white/80" data-slot="18:00">18:00</button>
+              </div>
+              <input type="hidden" id="chosen-slot" />
+            </div>
+            <div>
+              <span class="field-label !text-white/70">Inspection type</span>
+              <div class="grid grid-cols-2 gap-3">
+                <label class="cursor-pointer"><input type="radio" name="visit" value="physical" class="peer sr-only" checked /><span class="block text-center text-sm font-semibold py-2.5 rounded-sm border border-white/15 peer-checked:bg-white peer-checked:text-navy transition-colors">In person</span></label>
+                <label class="cursor-pointer"><input type="radio" name="visit" value="virtual" class="peer sr-only" /><span class="block text-center text-sm font-semibold py-2.5 rounded-sm border border-white/15 peer-checked:bg-white peer-checked:text-navy transition-colors">Virtual</span></label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-blue w-full">Request Appointment</button>
+            <p data-form-note class="hidden text-sm text-gold-soft text-center">Appointment requested — watch for a confirmation email.</p>
+          </form>
+        </div>
+
+        <div class="rounded-md overflow-hidden border border-mist reveal">
+          <iframe title="G Horizon office location map" class="w-full h-56" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=3.45%2C6.43%2C3.49%2C6.46&layer=mapnik&marker=6.445%2C3.47"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-[#F9F9FB] overflow-hidden pt-16 md:pt-24 pb-0 px-4">
+    <div class="w-full flex flex-col items-center gap-0">
+
+      <!-- ===== Footer Card ===== -->
+      <div class="w-full max-w-6xl mx-auto">
+        <div class="bg-[#E9EBEE] rounded-[48px] border border-slate-200 shadow-sm overflow-hidden">
+
+          <!-- Inner white box -->
+          <div class="bg-white rounded-[40px] m-2 shadow-sm">
+            <div class="p-8 md:p-10 lg:p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+
+              <!-- Brand info -->
+              <div class="lg:col-span-2 space-y-8">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-8 h-8 bg-[#1e3a8a] rounded-[8px] flex items-center justify-center">
+                    <span class="font-serif font-semibold text-white text-lg leading-none">G</span>
+                  </span>
+                  <span class="text-[26px] font-bold tracking-tight text-[#0F172A]">G Horizon</span>
+                </div>
+                <p class="text-[#64748B] leading-relaxed text-[16px] font-normal max-w-[320px]">Premium real estate sourcing, sales and bespoke consultancy designed to elevate where you live, work and invest.</p>
+                <div class="flex items-center gap-3">
+                  <a href="#" aria-label="LinkedIn" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  </a>
+                  <a href="#" aria-label="Twitter" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                  </a>
+                  <a href="#" aria-label="Instagram" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Explore -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Explore</h4>
+                <ul class="space-y-4">
+                  <li><a href="products.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Properties</a></li>
+                  <li><a href="services.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Services</a></li>
+                  <li><a href="car-sales.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Car Sales</a></li>
+                  <li><a href="faq.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">FAQ</a></li>
+                </ul>
+              </div>
+
+              <!-- Company -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Company</h4>
+                <ul class="space-y-4">
+                  <li><a href="about.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">About Us</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Careers</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Partners</a></li>
+                </ul>
+              </div>
+
+              <!-- Connect -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Connect</h4>
+                <ul class="space-y-4">
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Contact Us</a></li>
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Book a Visit</a></li>
+                  <li><a href="mailto:hello@ghorizon.com" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">hello@ghorizon.com</a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom legal bar -->
+          <div class="px-6 sm:px-12 md:px-16 lg:px-20 py-5 flex flex-col md:flex-row justify-between items-center gap-6 text-[15px]">
+            <p class="text-[#64748B] font-medium">&copy; <span id="year">2026</span> G Horizon Enterprise Limited. All rights reserved.</p>
+            <div class="flex gap-8 text-[#64748B] font-medium items-center">
+              <a href="#" class="hover:text-[#1E293B] transition-colors">Legal Center</a>
+              <div class="w-[1px] h-4 bg-slate-300"></div>
+              <a href="#" class="hover:text-[#1E293B] transition-colors">User Agreement</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== Giant Glass Text ===== -->
+      <div class="relative w-full flex items-center justify-center select-none pt-0 overflow-hidden">
+        <svg class="absolute w-0 h-0" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.25" result="outer-shadow"/>
+              <feComponentTransfer in="SourceAlpha" result="alpha"><feFuncA type="linear" slope="1" /></feComponentTransfer>
+              <feOffset in="alpha" dx="0" dy="4" result="offset-white" />
+              <feGaussianBlur in="offset-white" stdDeviation="4" result="blur-white" />
+              <feComposite in="alpha" in2="blur-white" operator="out" result="inner-white-mask" />
+              <feFlood flood-color="#ffffff" flood-opacity="0.25" result="white-fill" />
+              <feComposite in="white-fill" in2="inner-white-mask" operator="in" result="inner-white-final" />
+              <feGaussianBlur in="alpha" stdDeviation="6" result="blur-black" />
+              <feComposite in="alpha" in2="blur-black" operator="out" result="inner-black-mask" />
+              <feFlood flood-color="#000000" flood-opacity="0.25" result="black-fill" />
+              <feComposite in="black-fill" in2="inner-black-mask" operator="in" result="inner-black-final" />
+              <feMerge>
+                <feMergeNode in="outer-shadow" />
+                <feMergeNode in="SourceGraphic" />
+                <feMergeNode in="inner-white-final" />
+                <feMergeNode in="inner-black-final" />
+              </feMerge>
+            </filter>
+          </defs>
+        </svg>
+        <div class="relative reveal glass-reveal">
+          <h1 class="text-[min(17vw,220px)] font-sans font-bold tracking-tight leading-none select-none text-white px-4 whitespace-nowrap" style="filter: url(#glass-effect);">G Horizon</h1>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

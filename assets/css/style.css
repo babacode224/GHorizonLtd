@@ -1,0 +1,305 @@
+/* ============================================================
+   G Horizon Enterprise Limited — Global Stylesheet
+   Luxury real-estate design system
+   Deep Blue #1e3a8a · Light Blue #3b82f6 · Champagne #C9A24B
+   ============================================================ */
+
+:root {
+  --navy:       #1e3a8a;
+  --navy-deep:  #122a6b;
+  --navy-ink:   #0c1f52;
+  --blue:       #3b82f6;
+  --blue-light: #60a5fa;
+  --blue-tint:  #eff4ff;
+  --gold:       #c9a24b;
+  --gold-soft:  #e7d6ac;
+  --paper:      #ffffff;
+  --mist:       #f3f4f6;
+  --ink:        #0f172a;
+  --muted:      #475569;
+  --line:       #e2e8f0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, .font-display { font-family: 'Cormorant', Georgia, serif; }
+
+/* ---- Eyebrow / kicker label ---- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+}
+.eyebrow.center::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  font-weight: 600;
+  font-size: .92rem;
+  letter-spacing: .01em;
+  padding: .85rem 1.6rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+  border: 1px solid transparent;
+}
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: var(--navy-deep); box-shadow: 0 10px 30px -10px rgba(30,58,138,.55); }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-blue:hover { background: #2f6fe0; box-shadow: 0 10px 30px -10px rgba(59,130,246,.6); }
+.btn-ghost { background: transparent; color: var(--navy); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--navy); background: var(--blue-tint); }
+.btn-light { background: #fff; color: var(--navy); }
+.btn-light:hover { background: var(--mist); }
+.btn-outline-light { background: transparent; color: #fff; border-color: rgba(255,255,255,.45); }
+.btn-outline-light:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+
+/* ---- Navbar ---- */
+.nav-shell {
+  transition: background-color .35s ease, box-shadow .35s ease, backdrop-filter .35s ease;
+}
+.nav-scrolled {
+  background: rgba(255,255,255,.85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  box-shadow: 0 1px 0 rgba(15,23,42,.06), 0 8px 30px -18px rgba(15,23,42,.25);
+}
+.nav-link {
+  position: relative;
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--ink);
+  padding: .35rem 0;
+  transition: color .2s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 0; height: 2px;
+  background: var(--blue);
+  transition: width .25s ease;
+}
+.nav-link:hover { color: var(--navy); }
+.nav-link:hover::after,
+.nav-link.active::after { width: 100%; }
+.nav-link.active { color: var(--navy); }
+
+/* "Coming soon" pill on Car Sales */
+.pill {
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .15rem .4rem;
+  border-radius: 999px;
+  background: var(--gold-soft);
+  color: #7a5f1e;
+  vertical-align: middle;
+}
+
+/* ---- Status badges ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .3rem .6rem;
+  border-radius: 2px;
+}
+.badge::before { content:""; width:6px; height:6px; border-radius:999px; background: currentColor; }
+.badge-selling { background:#e7f6ee; color:#0f7a43; }
+.badge-sold    { background:#fdeaea; color:#b42318; }
+.badge-soon    { background: var(--blue-tint); color: var(--navy); }
+
+/* ---- Property card ---- */
+.prop-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+}
+.prop-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -30px rgba(12,31,82,.45);
+  border-color: transparent;
+}
+.prop-media { overflow: hidden; }
+.prop-media img { transition: transform .7s cubic-bezier(.22,1,.36,1); }
+.prop-card:hover .prop-media img { transform: scale(1.07); }
+
+/* ---- Reveal on scroll ---- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---- FAQ accordion ---- */
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  padding: 1.5rem 0;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+.faq-q .ico { transition: transform .3s ease; color: var(--blue); flex: none; }
+.faq-item.open .faq-q .ico { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .4s ease; color: var(--muted); }
+.faq-a-inner { padding: 0 0 1.5rem; line-height: 1.75; max-width: 60ch; }
+
+/* ---- Modal ---- */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(12,31,82,.55);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem; z-index: 100;
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal-card {
+  background: #fff; border-radius: 8px; width: 100%; max-width: 540px;
+  transform: translateY(16px) scale(.98);
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+  max-height: 92vh; overflow-y: auto;
+}
+.modal-overlay.open .modal-card { transform: none; }
+
+/* ---- Form fields ---- */
+.field {
+  width: 100%;
+  padding: .8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: .95rem;
+  background: #fff;
+  color: var(--ink);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+}
+.field-label { display:block; font-size:.8rem; font-weight:600; color:var(--muted); margin-bottom:.4rem; letter-spacing:.02em; }
+
+/* ---- Misc ---- */
+.hero-overlay {
+  background: linear-gradient(180deg, rgba(12,31,82,.55) 0%, rgba(12,31,82,.35) 40%, rgba(12,31,82,.75) 100%);
+}
+.divider-gold { width: 56px; height: 2px; background: var(--gold); }
+.link-arrow { display:inline-flex; align-items:center; gap:.45rem; font-weight:600; color:var(--navy); transition:gap .25s ease, color .2s ease; }
+.link-arrow:hover { gap:.8rem; color:var(--blue); }
+
+/* filter chips */
+.chip {
+  font-size: .85rem; font-weight: 600; letter-spacing: .01em;
+  padding: .55rem 1.15rem; border-radius: 999px;
+  border: 1px solid var(--line); background: #fff; color: var(--muted);
+  cursor: pointer; transition: all .2s ease;
+}
+.chip:hover { border-color: var(--blue); color: var(--navy); }
+.chip-active { background: var(--navy); border-color: var(--navy); color: #fff; }
+.chip-active:hover { color: #fff; }
+
+/* time-slot chips */
+.slot {
+  border:1px solid var(--line); border-radius:3px; padding:.55rem .25rem; text-align:center;
+  font-size:.82rem; font-weight:600; color:var(--muted); cursor:pointer; transition:all .2s ease;
+}
+.slot:hover { border-color: var(--blue); color: var(--navy); }
+.slot.sel { background: var(--navy); border-color: var(--navy); color:#fff; }
+
+/* ============================================================
+   Liquid Glass  (cinematic hero treatment)
+   ============================================================ */
+.liquid-glass {
+  background: rgba(0, 0, 0, 0.4);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 20%,
+    rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.1) 80%, rgba(255,255,255,0.3) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Character-by-character heading entrance */
+.ah-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-18px);
+  transition: opacity 500ms ease, transform 500ms ease;
+  will-change: opacity, transform;
+}
+.ah-char.in { opacity: 1; transform: translateX(0); }
+
+/* FadeIn wrapper */
+.fade-in { opacity: 0; transition-property: opacity; transition-timing-function: ease; }
+.fade-in.in { opacity: 1; }
+
+/* GlassText (footer) reveal — scale + fade, replaces motion/react whileInView */
+.glass-reveal {
+  transform: scale(.98);
+  transition: opacity 1.8s cubic-bezier(.16, 1, .3, 1), transform 1.8s cubic-bezier(.16, 1, .3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal, .fade-in, .ah-char { opacity:1; transform:none; }
+}

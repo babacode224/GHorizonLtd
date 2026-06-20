@@ -1,0 +1,25 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "G Horizon (Static)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "-l", "5050", "."],
+      "port": 5050
+    },
+    {
+      "name": "Frontend (Next.js)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "dev"],
+      "port": 3000,
+      "cwd": "ListingsPipeline/frontend"
+    },
+    {
+      "name": "Backend (FastAPI)",
+      "runtimeExecutable": "uvicorn",
+      "runtimeArgs": ["main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
+      "port": 8000,
+      "cwd": "ListingsPipeline/backend"
+    }
+  ]
+}

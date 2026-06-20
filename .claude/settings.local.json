@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "PowerShell(npx uipro-cli init --ai claude 2>&1)",
+      "Bash(claude mcp *)",
+      "PowerShell(Get-ChildItem \"$env:LOCALAPPDATA\\\\Claude-3p\" | Select-Object Name, FullName)",
+      "Bash(python3 \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"real estate car sales admin dashboard dark professional SaaS\" --design-system -p \"ListingsPipeline\")",
+      "Bash(python \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"real estate car sales admin dashboard dark professional SaaS\" --design-system -p \"ListingsPipeline\")",
+      "PowerShell(python \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"real estate car sales admin dashboard dark professional SaaS\" --design-system -p \"ListingsPipeline\" 2>&1)",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"luxury real estate corporate property listings premium professional\" --design-system -p \"G Horizon Enterprise\")",
+      "Bash(python3 \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"luxury real estate corporate property listings premium professional\" --design-system -p \"G Horizon Enterprise\")"
+    ]
+  }
+}

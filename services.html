@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — G Horizon Enterprise Limited</title>
+  <meta name="description" content="Property sourcing, sales, valuation, title verification and bespoke real estate consultancy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { navy:{DEFAULT:'#1e3a8a',deep:'#122a6b',ink:'#0c1f52'}, sky:{DEFAULT:'#3b82f6',light:'#60a5fa',tint:'#eff4ff'}, gold:{DEFAULT:'#c9a24b',soft:'#e7d6ac'}, mist:'#f3f4f6' },
+      fontFamily: { serif:['Cormorant','Georgia','serif'], sans:['Montserrat','system-ui','sans-serif'] },
+      maxWidth: { container:'1200px' } } } };
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="nav" class="nav-shell nav-scrolled fixed top-0 inset-x-0 z-50">
+    <div class="max-w-container mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-[72px]">
+        <a href="index.html" class="flex items-center gap-3 shrink-0">
+          <span class="grid place-items-center w-10 h-10 rounded-sm bg-navy text-white font-serif text-lg leading-none">G</span>
+          <span class="leading-tight"><span class="block font-serif text-[1.05rem] font-semibold text-navy">G Horizon</span><span class="block text-[.62rem] tracking-[.22em] uppercase text-gold font-semibold">Enterprise Ltd</span></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-7">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="products.html" class="nav-link">Products</a>
+          <a href="about.html" class="nav-link">About Us</a>
+          <a href="services.html" class="nav-link active">Services</a>
+          <a href="contact.html" class="nav-link">Consulting</a>
+          <a href="faq.html" class="nav-link">FAQ</a>
+          <a href="car-sales.html" class="nav-link flex items-center gap-1.5">Car Sales <span class="pill">Soon</span></a>
+        </nav>
+        <div class="hidden lg:flex items-center gap-3"><a href="contact.html" class="btn btn-primary">Book a Consultation</a></div>
+        <button id="burger" aria-label="Open menu" aria-expanded="false" class="lg:hidden p-2 -mr-2 text-navy"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-mist">
+      <nav class="px-5 py-4 flex flex-col gap-1">
+        <a href="index.html" class="py-2.5 font-medium text-ink">Home</a>
+        <a href="products.html" class="py-2.5 font-medium text-ink">Products</a>
+        <a href="about.html" class="py-2.5 font-medium text-ink">About Us</a>
+        <a href="services.html" class="py-2.5 font-medium text-navy">Services</a>
+        <a href="contact.html" class="py-2.5 font-medium text-ink">Consulting / Contact</a>
+        <a href="faq.html" class="py-2.5 font-medium text-ink">FAQ</a>
+        <a href="car-sales.html" class="py-2.5 font-medium text-ink flex items-center gap-2">Car Sales <span class="pill">Soon</span></a>
+        <a href="contact.html" class="btn btn-primary mt-3">Book a Consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="pt-[72px] bg-navy-ink text-white">
+    <div class="max-w-container mx-auto px-5 lg:px-8 py-16 lg:py-20">
+      <span class="eyebrow !text-gold-soft mb-4">What We Do</span>
+      <h1 class="font-serif text-4xl lg:text-6xl font-semibold leading-tight mb-4 max-w-2xl">Real estate services, end to end.</h1>
+      <p class="text-white/80 max-w-xl text-lg">Whether you're buying, selling or building a portfolio, our specialists manage every stage with rigour and discretion.</p>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES GRID ===== -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-container mx-auto px-5 lg:px-8 grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+      <!-- repeated service cards -->
+      <div class="reveal p-8 border border-mist rounded-md hover:shadow-xl hover:border-sky/40 transition-all duration-300">
+        <div class="w-12 h-12 grid place-items-center rounded-sm bg-sky-tint text-navy mb-6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg></div>
+        <h3 class="font-serif text-xl font-semibold text-navy mb-3">Property Sourcing</h3>
+        <p class="text-muted leading-relaxed">We match your brief to vetted on- and off-market opportunities across residential, land and commercial sectors.</p>
+      </div>
+      <div class="reveal p-8 border border-mist rounded-md hover:shadow-xl hover:border-sky/40 transition-all duration-300">
+        <div class="w-12 h-12 grid place-items-center rounded-sm bg-sky-tint text-navy mb-6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 class="font-serif text-xl font-semibold text-navy mb-3">Sales & Marketing</h3>
+        <p class="text-muted leading-relaxed">Professional photography, listing exposure and qualified buyer matching to sell your property at its true value.</p>
+      </div>
+      <div class="reveal p-8 border border-mist rounded-md hover:shadow-xl hover:border-sky/40 transition-all duration-300">
+        <div class="w-12 h-12 grid place-items-center rounded-sm bg-sky-tint text-navy mb-6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 class="font-serif text-xl font-semibold text-navy mb-3">Title Verification</h3>
+        <p class="text-muted leading-relaxed">Independent legal checks on C-of-O, deeds and governor's consent so you buy with absolute certainty.</p>
+      </div>
+      <div class="reveal p-8 border border-mist rounded-md hover:shadow-xl hover:border-sky/40 transition-all duration-300">
+        <div class="w-12 h-12 grid place-items-center rounded-sm bg-sky-tint text-navy mb-6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18M7 14l3-3 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 class="font-serif text-xl font-semibold text-navy mb-3">Valuation & Investment</h3>
+        <p class="text-muted leading-relaxed">Data-driven valuations and ROI strategy to help you build a resilient, appreciating property portfolio.</p>
+      </div>
+      <div class="reveal p-8 border border-mist rounded-md hover:shadow-xl hover:border-sky/40 transition-all duration-300">
+        <div class="w-12 h-12 grid place-items-center rounded-sm bg-sky-tint text-navy mb-6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3 class="font-serif text-xl font-semibold text-navy mb-3">Inspections & Virtual Tours</h3>
+        <p class="text-muted leading-relaxed">Physical or 360° virtual viewings — inspect any property in detail, wherever you are in the world.</p>
+      </div>
+      <div class="reveal p-8 border border-mist rounded-md hover:shadow-xl hover:border-sky/40 transition-all duration-300">
+        <div class="w-12 h-12 grid place-items-center rounded-sm bg-sky-tint text-navy mb-6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 class="font-serif text-xl font-semibold text-navy mb-3">Bespoke Consultancy</h3>
+        <p class="text-muted leading-relaxed">Dedicated advisors for high-net-worth clients, family offices and corporates seeking a managed approach.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="py-20 lg:py-28 bg-mist">
+    <div class="max-w-container mx-auto px-5 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal"><span class="eyebrow center justify-center mb-4">Our Process</span><h2 class="font-serif text-4xl lg:text-5xl font-semibold text-navy-ink leading-tight">A clear path from enquiry to ownership</h2></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+        <div class="reveal bg-white p-7 rounded-md border border-mist"><span class="font-serif text-3xl text-gold font-semibold">01</span><h3 class="font-semibold text-navy mt-3 mb-2">Consultation</h3><p class="text-muted text-sm leading-relaxed">We define your goals, budget and timeline in a private session.</p></div>
+        <div class="reveal bg-white p-7 rounded-md border border-mist"><span class="font-serif text-3xl text-gold font-semibold">02</span><h3 class="font-semibold text-navy mt-3 mb-2">Shortlist</h3><p class="text-muted text-sm leading-relaxed">Receive a curated selection, each with full due diligence.</p></div>
+        <div class="reveal bg-white p-7 rounded-md border border-mist"><span class="font-serif text-3xl text-gold font-semibold">03</span><h3 class="font-semibold text-navy mt-3 mb-2">Inspect</h3><p class="text-muted text-sm leading-relaxed">Tour properties physically or virtually with an advisor.</p></div>
+        <div class="reveal bg-white p-7 rounded-md border border-mist"><span class="font-serif text-3xl text-gold font-semibold">04</span><h3 class="font-semibold text-navy mt-3 mb-2">Close</h3><p class="text-muted text-sm leading-relaxed">We manage negotiation, paperwork and a seamless handover.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-container mx-auto px-5 lg:px-8">
+      <div class="rounded-lg bg-gradient-to-br from-navy to-navy-ink px-8 lg:px-16 py-16 text-center text-white reveal relative overflow-hidden">
+        <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-sky/20 blur-3xl"></div>
+        <h2 class="font-serif text-3xl lg:text-5xl font-semibold mb-5 max-w-2xl mx-auto leading-tight">Tell us what you're looking for.</h2>
+        <p class="text-white/80 max-w-xl mx-auto mb-9">Share your brief and a dedicated advisor will build a tailored shortlist for you.</p>
+        <a href="contact.html" class="btn btn-light">Start Your Brief</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-[#F9F9FB] overflow-hidden pt-16 md:pt-24 pb-0 px-4">
+    <div class="w-full flex flex-col items-center gap-0">
+
+      <!-- ===== Footer Card ===== -->
+      <div class="w-full max-w-6xl mx-auto">
+        <div class="bg-[#E9EBEE] rounded-[48px] border border-slate-200 shadow-sm overflow-hidden">
+
+          <!-- Inner white box -->
+          <div class="bg-white rounded-[40px] m-2 shadow-sm">
+            <div class="p-8 md:p-10 lg:p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+
+              <!-- Brand info -->
+              <div class="lg:col-span-2 space-y-8">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-8 h-8 bg-[#1e3a8a] rounded-[8px] flex items-center justify-center">
+                    <span class="font-serif font-semibold text-white text-lg leading-none">G</span>
+                  </span>
+                  <span class="text-[26px] font-bold tracking-tight text-[#0F172A]">G Horizon</span>
+                </div>
+                <p class="text-[#64748B] leading-relaxed text-[16px] font-normal max-w-[320px]">Premium real estate sourcing, sales and bespoke consultancy designed to elevate where you live, work and invest.</p>
+                <div class="flex items-center gap-3">
+                  <a href="#" aria-label="LinkedIn" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  </a>
+                  <a href="#" aria-label="Twitter" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                  </a>
+                  <a href="#" aria-label="Instagram" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group">
+                    <svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Explore -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Explore</h4>
+                <ul class="space-y-4">
+                  <li><a href="products.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Properties</a></li>
+                  <li><a href="services.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Services</a></li>
+                  <li><a href="car-sales.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Car Sales</a></li>
+                  <li><a href="faq.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">FAQ</a></li>
+                </ul>
+              </div>
+
+              <!-- Company -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Company</h4>
+                <ul class="space-y-4">
+                  <li><a href="about.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">About Us</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Careers</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Partners</a></li>
+                </ul>
+              </div>
+
+              <!-- Connect -->
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Connect</h4>
+                <ul class="space-y-4">
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Contact Us</a></li>
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Book a Visit</a></li>
+                  <li><a href="mailto:hello@ghorizon.com" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">hello@ghorizon.com</a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom legal bar -->
+          <div class="px-6 sm:px-12 md:px-16 lg:px-20 py-5 flex flex-col md:flex-row justify-between items-center gap-6 text-[15px]">
+            <p class="text-[#64748B] font-medium">&copy; <span id="year">2026</span> G Horizon Enterprise Limited. All rights reserved.</p>
+            <div class="flex gap-8 text-[#64748B] font-medium items-center">
+              <a href="#" class="hover:text-[#1E293B] transition-colors">Legal Center</a>
+              <div class="w-[1px] h-4 bg-slate-300"></div>
+              <a href="#" class="hover:text-[#1E293B] transition-colors">User Agreement</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== Giant Glass Text ===== -->
+      <div class="relative w-full flex items-center justify-center select-none pt-0 overflow-hidden">
+        <svg class="absolute w-0 h-0" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.25" result="outer-shadow"/>
+              <feComponentTransfer in="SourceAlpha" result="alpha"><feFuncA type="linear" slope="1" /></feComponentTransfer>
+              <feOffset in="alpha" dx="0" dy="4" result="offset-white" />
+              <feGaussianBlur in="offset-white" stdDeviation="4" result="blur-white" />
+              <feComposite in="alpha" in2="blur-white" operator="out" result="inner-white-mask" />
+              <feFlood flood-color="#ffffff" flood-opacity="0.25" result="white-fill" />
+              <feComposite in="white-fill" in2="inner-white-mask" operator="in" result="inner-white-final" />
+              <feGaussianBlur in="alpha" stdDeviation="6" result="blur-black" />
+              <feComposite in="alpha" in2="blur-black" operator="out" result="inner-black-mask" />
+              <feFlood flood-color="#000000" flood-opacity="0.25" result="black-fill" />
+              <feComposite in="black-fill" in2="inner-black-mask" operator="in" result="inner-black-final" />
+              <feMerge>
+                <feMergeNode in="outer-shadow" />
+                <feMergeNode in="SourceGraphic" />
+                <feMergeNode in="inner-white-final" />
+                <feMergeNode in="inner-black-final" />
+              </feMerge>
+            </filter>
+          </defs>
+        </svg>
+        <div class="relative reveal glass-reveal">
+          <h1 class="text-[min(17vw,220px)] font-sans font-bold tracking-tight leading-none select-none text-white px-4 whitespace-nowrap" style="filter: url(#glass-effect);">G Horizon</h1>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
