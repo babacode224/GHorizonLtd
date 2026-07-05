@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "AfriCyberCore (Static)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "-l", "5051", "AfriCyberCore"],
+      "port": 5051
+    },
+    {
       "name": "G Horizon (Static)",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["-y", "serve", "-l", "5050", "."],
@@ -20,6 +26,13 @@
       "runtimeArgs": ["main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
       "port": 8000,
       "cwd": "ListingsPipeline/backend"
+    },
+    {
+      "name": "HealthSync",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "3100"],
+      "port": 3100,
+      "cwd": "healthsync"
     }
   ]
 }

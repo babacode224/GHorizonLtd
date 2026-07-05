@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Property — G Horizon Enterprise Limited</title>
+  <meta name="description" content="Property details, gallery and video tour." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { navy:{DEFAULT:'#1e3a8a',deep:'#122a6b',ink:'#0c1f52'}, sky:{DEFAULT:'#3b82f6',light:'#60a5fa',tint:'#eff4ff'}, gold:{DEFAULT:'#c9a24b',soft:'#e7d6ac'}, mist:'#f3f4f6' },
+      fontFamily: { serif:['Cormorant','Georgia','serif'], sans:['Inter','system-ui','sans-serif'] },
+      maxWidth: { container:'1200px' } } } };
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="antialiased">
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="nav" class="nav-shell nav-scrolled fixed top-0 inset-x-0 z-50">
+    <div class="max-w-container mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-[72px]">
+        <a href="index.html" class="flex items-center gap-3 shrink-0">
+          <span class="grid place-items-center w-10 h-10 rounded-sm bg-navy text-white font-serif text-lg leading-none">G</span>
+          <span class="leading-tight"><span class="block font-serif text-[1.05rem] font-semibold text-navy">G Horizon</span><span class="block text-[.62rem] tracking-[.22em] uppercase text-gold font-semibold">Enterprise Ltd</span></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-7">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="products.html" class="nav-link active">Products</a>
+          <a href="about.html" class="nav-link">About Us</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="contact.html" class="nav-link">Consulting</a>
+          <a href="faq.html" class="nav-link">FAQ</a>
+          <a href="car-sales.html" class="nav-link flex items-center gap-1.5">Car Sales <span class="pill">Soon</span></a>
+        </nav>
+        <div class="hidden lg:flex items-center gap-3"><a href="contact.html" class="btn btn-primary">Book a Consultation</a></div>
+        <button id="burger" aria-label="Open menu" aria-expanded="false" class="lg:hidden p-2 -mr-2 text-navy"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-mist">
+      <nav class="px-5 py-4 flex flex-col gap-1">
+        <a href="index.html" class="py-2.5 font-medium text-ink">Home</a>
+        <a href="products.html" class="py-2.5 font-medium text-navy">Products</a>
+        <a href="about.html" class="py-2.5 font-medium text-ink">About Us</a>
+        <a href="services.html" class="py-2.5 font-medium text-ink">Services</a>
+        <a href="contact.html" class="py-2.5 font-medium text-ink">Consulting / Contact</a>
+        <a href="faq.html" class="py-2.5 font-medium text-ink">FAQ</a>
+        <a href="car-sales.html" class="py-2.5 font-medium text-ink flex items-center gap-2">Car Sales <span class="pill">Soon</span></a>
+        <a href="contact.html" class="btn btn-primary mt-3">Book a Consultation</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== PROPERTY DETAIL (rendered by property.js) ===== -->
+  <main id="property-detail" class="pt-[72px] min-h-[70vh]">
+    <div class="max-w-container mx-auto px-5 lg:px-8 py-24 text-center text-muted">Loading property…</div>
+  </main>
+
+  <!-- ===== INQUIRY MODAL ===== -->
+  <div id="inquiry-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="flex items-start justify-between p-6 border-b border-mist">
+        <div>
+          <h3 id="modal-title" class="font-serif text-xl font-semibold text-navy">Quick Inquiry</h3>
+          <p class="text-sm text-muted mt-1">Re: <span id="modal-prop-name" class="font-medium text-ink">this property</span></p>
+        </div>
+        <button data-close aria-label="Close" class="p-2 -m-2 text-muted hover:text-navy">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <form data-demo class="p-6 space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="field-label" for="m-name">Full name</label><input id="m-name" class="field" required /></div>
+          <div><label class="field-label" for="m-phone">Phone</label><input id="m-phone" type="tel" class="field" required /></div>
+        </div>
+        <div><label class="field-label" for="m-email">Email</label><input id="m-email" type="email" class="field" required /></div>
+        <div><label class="field-label" for="m-msg">Message</label><textarea id="m-msg" rows="3" class="field" placeholder="I'd like to know more about this property…"></textarea></div>
+        <button type="submit" class="btn btn-primary w-full">Send Inquiry</button>
+        <p data-form-note class="hidden text-sm text-green-600 text-center">Inquiry sent — an advisor will contact you shortly.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-[#F9F9FB] overflow-hidden pt-16 md:pt-24 pb-0 px-4">
+    <div class="w-full flex flex-col items-center gap-0">
+      <div class="w-full max-w-6xl mx-auto">
+        <div class="bg-[#E9EBEE] rounded-[48px] border border-slate-200 shadow-sm overflow-hidden">
+          <div class="bg-white rounded-[40px] m-2 shadow-sm">
+            <div class="p-8 md:p-10 lg:p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+              <div class="lg:col-span-2 space-y-8">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-8 h-8 bg-[#1e3a8a] rounded-[8px] flex items-center justify-center"><span class="font-serif font-semibold text-white text-lg leading-none">G</span></span>
+                  <span class="text-[26px] font-bold tracking-tight text-[#0F172A]">G Horizon</span>
+                </div>
+                <p class="text-[#64748B] leading-relaxed text-[16px] font-normal max-w-[320px]">Premium real estate sourcing, sales and bespoke consultancy designed to elevate where you live, work and invest.</p>
+                <div class="flex items-center gap-3">
+                  <a href="#" aria-label="LinkedIn" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group"><svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                  <a href="#" aria-label="Twitter" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group"><svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+                  <a href="#" aria-label="Instagram" class="w-[44px] h-[44px] flex items-center justify-center rounded-xl border border-slate-100 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-slate-50 transition-all active:scale-95 group"><svg class="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                </div>
+              </div>
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Explore</h4>
+                <ul class="space-y-4">
+                  <li><a href="products.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Properties</a></li>
+                  <li><a href="services.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Services</a></li>
+                  <li><a href="car-sales.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Car Sales</a></li>
+                  <li><a href="faq.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">FAQ</a></li>
+                </ul>
+              </div>
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Company</h4>
+                <ul class="space-y-4">
+                  <li><a href="about.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">About Us</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Careers</a></li>
+                  <li><a href="#" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Partners</a></li>
+                </ul>
+              </div>
+              <div class="space-y-6">
+                <h4 class="text-[14px] font-medium text-[#94A3B8]">Connect</h4>
+                <ul class="space-y-4">
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Contact Us</a></li>
+                  <li><a href="contact.html" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">Book a Visit</a></li>
+                  <li><a href="mailto:hello@ghorizon.com" class="text-[15px] font-medium text-[#1E293B] hover:text-[#3b82f6] transition-colors">hello@ghorizon.com</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 sm:px-12 md:px-16 lg:px-20 py-5 flex flex-col md:flex-row justify-between items-center gap-6 text-[15px]">
+            <p class="text-[#64748B] font-medium">&copy; <span id="year">2026</span> G Horizon Enterprise Limited. All rights reserved.</p>
+            <div class="flex gap-8 text-[#64748B] font-medium items-center">
+              <a href="#" class="hover:text-[#1E293B] transition-colors">Legal Center</a>
+              <div class="w-[1px] h-4 bg-slate-300"></div>
+              <a href="#" class="hover:text-[#1E293B] transition-colors">User Agreement</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="relative w-full flex items-center justify-center select-none pt-0 overflow-hidden">
+        <svg class="absolute w-0 h-0" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.25" result="outer-shadow"/>
+              <feComponentTransfer in="SourceAlpha" result="alpha"><feFuncA type="linear" slope="1" /></feComponentTransfer>
+              <feOffset in="alpha" dx="0" dy="4" result="offset-white" />
+              <feGaussianBlur in="offset-white" stdDeviation="4" result="blur-white" />
+              <feComposite in="alpha" in2="blur-white" operator="out" result="inner-white-mask" />
+              <feFlood flood-color="#ffffff" flood-opacity="0.25" result="white-fill" />
+              <feComposite in="white-fill" in2="inner-white-mask" operator="in" result="inner-white-final" />
+              <feGaussianBlur in="alpha" stdDeviation="6" result="blur-black" />
+              <feComposite in="alpha" in2="blur-black" operator="out" result="inner-black-mask" />
+              <feFlood flood-color="#000000" flood-opacity="0.25" result="black-fill" />
+              <feComposite in="black-fill" in2="inner-black-mask" operator="in" result="inner-black-final" />
+              <feMerge><feMergeNode in="outer-shadow" /><feMergeNode in="SourceGraphic" /><feMergeNode in="inner-white-final" /><feMergeNode in="inner-black-final" /></feMerge>
+            </filter>
+          </defs>
+        </svg>
+        <div class="relative reveal glass-reveal">
+          <h1 class="text-[min(17vw,220px)] font-sans font-bold tracking-tight leading-none select-none text-white px-4 whitespace-nowrap" style="filter: url(#glass-effect);">G Horizon</h1>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/property.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

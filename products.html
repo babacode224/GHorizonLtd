@@ -73,234 +73,63 @@
   <!-- ===== FILTER BAR ===== -->
   <section class="bg-white border-b border-mist sticky top-[72px] z-40">
     <div class="max-w-container mx-auto px-5 lg:px-8 py-5">
-      <div class="flex flex-col lg:flex-row lg:items-center gap-4 lg:justify-between">
-        <!-- category chips -->
-        <div class="flex flex-wrap gap-2.5">
-          <button class="chip chip-active" data-filter="all">All</button>
-          <button class="chip" data-filter="house">Houses</button>
-          <button class="chip" data-filter="land">Land Plots</button>
-          <button class="chip" data-filter="commercial">Commercial</button>
+      <div class="flex flex-col gap-4">
+        <!-- Sale / Rent toggle -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span class="text-[.7rem] uppercase tracking-[.18em] text-muted font-semibold mr-1">Listing</span>
+          <button class="chip chip-active" data-type="all">All</button>
+          <button class="chip" data-type="sale">For Sale</button>
+          <button class="chip" data-type="rent">For Rent</button>
         </div>
-        <!-- selects -->
-        <div class="flex flex-wrap gap-3">
-          <div>
-            <label for="filter-location" class="sr-only">Location</label>
-            <select id="filter-location" class="field !py-2.5 !pr-9 text-sm">
-              <option value="all">All Locations</option>
-              <option value="lagos">Lagos</option>
-              <option value="abuja">Abuja</option>
-              <option value="port-harcourt">Port Harcourt</option>
-            </select>
+
+        <div class="flex flex-col lg:flex-row lg:items-center gap-4 lg:justify-between">
+          <!-- category chips -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="text-[.7rem] uppercase tracking-[.18em] text-muted font-semibold mr-1">Type</span>
+            <button class="chip chip-active" data-filter="all">All</button>
+            <button class="chip" data-filter="house">Houses</button>
+            <button class="chip" data-filter="land">Land Plots</button>
+            <button class="chip" data-filter="commercial">Commercial</button>
           </div>
-          <div>
-            <label for="filter-price" class="sr-only">Price range</label>
-            <select id="filter-price" class="field !py-2.5 !pr-9 text-sm">
-              <option value="all">Any Price</option>
-              <option value="lt100">Under ₦100M</option>
-              <option value="100-300">₦100M – ₦300M</option>
-              <option value="gt300">Above ₦300M</option>
-            </select>
-          </div>
-          <div>
-            <label for="filter-sort" class="sr-only">Sort</label>
-            <select id="filter-sort" class="field !py-2.5 !pr-9 text-sm">
-              <option value="featured">Featured</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
+          <!-- selects -->
+          <div class="flex flex-wrap gap-3">
+            <div>
+              <label for="filter-location" class="sr-only">Location</label>
+              <select id="filter-location" class="field !py-2.5 !pr-9 text-sm">
+                <option value="all">All Locations</option>
+                <option value="lagos">Lagos</option>
+                <option value="abuja">Abuja</option>
+                <option value="port-harcourt">Port Harcourt</option>
+              </select>
+            </div>
+            <div>
+              <label for="filter-price" class="sr-only">Price range</label>
+              <select id="filter-price" class="field !py-2.5 !pr-9 text-sm">
+                <option value="all">Any Price</option>
+                <option value="lt100">Under ₦100M</option>
+                <option value="100-300">₦100M – ₦300M</option>
+                <option value="gt300">Above ₦300M</option>
+              </select>
+            </div>
+            <div>
+              <label for="filter-sort" class="sr-only">Sort</label>
+              <select id="filter-sort" class="field !py-2.5 !pr-9 text-sm">
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
-      <p class="text-sm text-muted mt-4"><span id="result-count">9</span> properties available</p>
+      <p class="text-sm text-muted mt-4"><span id="result-count">0</span> properties available</p>
     </div>
   </section>
 
   <!-- ===== GRID ===== -->
   <section class="py-12 lg:py-16 bg-mist">
     <div class="max-w-container mx-auto px-5 lg:px-8">
-      <div id="property-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-
-        <!-- 1 -->
-        <article class="prop-card" data-category="house" data-location="lagos" data-price="450000000" data-index="1">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80" alt="The Maple Residence villa" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
-          </div>
-          <div class="p-6">
-            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">House</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">The Maple Residence</h3>
-            <p class="text-sm text-muted mb-4">Banana Island, Lagos</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span>4 Beds</span><span>5 Baths</span><span>620 m²</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦450M</span>
-              <button data-inquire="The Maple Residence" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 2 -->
-        <article class="prop-card" data-category="land" data-location="lagos" data-price="75000000" data-index="2">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80" alt="Horizon Gardens land plot" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
-          </div>
-          <div class="p-6">
-            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Land Plot</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Horizon Gardens Estate</h3>
-            <p class="text-sm text-muted mb-4">Ibeju-Lekki, Lagos</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span>1,000 m²</span><span>C-of-O Title</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦75M</span>
-              <button data-inquire="Horizon Gardens Estate" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3 -->
-        <article class="prop-card" data-category="commercial" data-location="abuja" data-price="1200000000" data-index="3">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80" alt="Meridian Office Plaza tower" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-soon absolute top-4 left-4">Coming Soon</span>
-          </div>
-          <div class="p-6">
-            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Commercial</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Meridian Office Plaza</h3>
-            <p class="text-sm text-muted mb-4">Central Business District, Abuja</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span>8 Floors</span><span>3,200 m²</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦1.2B</span>
-              <button data-inquire="Meridian Office Plaza" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 4 -->
-        <article class="prop-card" data-category="house" data-location="abuja" data-price="280000000" data-index="4">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80" alt="Cedar Court family home" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
-          </div>
-          <div class="p-6">
-            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">House</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Cedar Court</h3>
-            <p class="text-sm text-muted mb-4">Maitama, Abuja</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span>5 Beds</span><span>6 Baths</span><span>740 m²</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦280M</span>
-              <button data-inquire="Cedar Court" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 5 -->
-        <article class="prop-card" data-category="house" data-location="lagos" data-price="95000000" data-index="5">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=80" alt="The Aubrey townhouse" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-sold absolute top-4 left-4">Sold</span>
-          </div>
-          <div class="p-6">
-            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">House</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">The Aubrey Townhouse</h3>
-            <p class="text-sm text-muted mb-4">Ikoyi, Lagos</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span>3 Beds</span><span>4 Baths</span><span>410 m²</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦95M</span>
-              <button data-inquire="The Aubrey Townhouse" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 6 -->
-        <article class="prop-card" data-category="land" data-location="port-harcourt" data-price="40000000" data-index="6">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?auto=format&fit=crop&w=900&q=80" alt="Riverside land parcel" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
-          </div>
-          <div class="p-6">
-            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Land Plot</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Riverside Parcel</h3>
-            <p class="text-sm text-muted mb-4">GRA Phase 2, Port Harcourt</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span>800 m²</span><span>Deed of Assignment</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦40M</span>
-              <button data-inquire="Riverside Parcel" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 7 -->
-        <article class="prop-card" data-category="commercial" data-location="lagos" data-price="320000000" data-index="7">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Retail and office space interior" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
-          </div>
-          <div class="p-6">
-            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Commercial</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Vantage Retail Suites</h3>
-            <p class="text-sm text-muted mb-4">Victoria Island, Lagos</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span>1,100 m²</span><span>12 Units</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦320M</span>
-              <button data-inquire="Vantage Retail Suites" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 8 -->
-        <article class="prop-card" data-category="house" data-location="lagos" data-price="180000000" data-index="8">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=900&q=80" alt="The Serenade duplex" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
-          </div>
-          <div class="p-6">
-            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">House</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">The Serenade Duplex</h3>
-            <p class="text-sm text-muted mb-4">Lekki Phase 1, Lagos</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span>4 Beds</span><span>5 Baths</span><span>520 m²</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦180M</span>
-              <button data-inquire="The Serenade Duplex" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 9 -->
-        <article class="prop-card" data-category="commercial" data-location="abuja" data-price="60000000" data-index="9">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=900&q=80" alt="Warehouse logistics space" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
-          </div>
-          <div class="p-6">
-            <div class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Commercial</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Logix Warehouse Bay</h3>
-            <p class="text-sm text-muted mb-4">Idu Industrial, Abuja</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span>2,400 m²</span><span>Loading Dock</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦60M</span>
-              <button data-inquire="Logix Warehouse Bay" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-      </div>
+      <div id="property-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7"></div>
 
       <!-- empty state -->
       <div id="empty-state" class="hidden text-center py-20">
@@ -451,6 +280,11 @@
       </form>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/data.js"></script>
+
+  <script src="assets/js/products.js"></script>
 
   <script src="assets/js/main.js"></script>
 </body>

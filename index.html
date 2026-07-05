@@ -74,12 +74,12 @@
   </header>
 
   <!-- ===== CINEMATIC VIDEO HERO ===== -->
-  <section class="relative w-full min-h-[100svh] overflow-hidden text-white">
-    <!-- Background video (raw, no overlay) -->
-    <video
-      class="absolute inset-0 w-full h-full object-cover"
-      autoplay loop muted playsinline preload="auto"
-      poster="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=80">
+  <section class="relative w-full min-h-[100svh] overflow-hidden text-white bg-navy-ink">
+    <!-- Background video (raw, no overlay). No poster image — fades in when it starts playing,
+         so no still "previous picture" flashes before the video paints. -->
+    <video id="hero-video"
+      class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700"
+      autoplay loop muted playsinline preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" type="video/mp4" />
     </video>
 
@@ -173,77 +173,7 @@
         </a>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-        <!-- Property 1 -->
-        <article class="prop-card reveal">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80" alt="Modern four-bedroom villa with pool" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-gold font-semibold mb-2">House</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">The Maple Residence</h3>
-            <p class="text-sm text-muted flex items-center gap-1.5 mb-4">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.7-7-11a7 7 0 0114 0c0 5.3-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-              Banana Island, Lagos</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12V7a2 2 0 012-2h14a2 2 0 012 2v5M3 12h18M3 12v6M21 12v6M6 18v2M18 18v2"/></svg>4 Beds</span>
-              <span class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12V6a2 2 0 012-2h0a2 2 0 012 2M4 12h16v3a4 4 0 01-4 4H8a4 4 0 01-4-4v-3z"/></svg>5 Baths</span>
-              <span class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3h18v18H3z"/></svg>620 m²</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦450M</span>
-              <button data-inquire="The Maple Residence" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Property 2 -->
-        <article class="prop-card reveal">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80" alt="Cleared land plot with open sky" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-selling absolute top-4 left-4">Selling</span>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-gold font-semibold mb-2">Land Plot</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Horizon Gardens Estate</h3>
-            <p class="text-sm text-muted flex items-center gap-1.5 mb-4">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.7-7-11a7 7 0 0114 0c0 5.3-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-              Ibeju-Lekki, Lagos</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3h18v18H3z"/></svg>1,000 m²</span>
-              <span class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7l8-4z"/></svg>C-of-O</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦75M</span>
-              <button data-inquire="Horizon Gardens Estate" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Property 3 -->
-        <article class="prop-card reveal">
-          <div class="prop-media relative aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80" alt="Glass commercial tower" loading="lazy" class="w-full h-full object-cover" />
-            <span class="badge badge-soon absolute top-4 left-4">Coming Soon</span>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-gold font-semibold mb-2">Commercial</div>
-            <h3 class="font-serif text-xl font-semibold text-navy mb-1.5">Meridian Office Plaza</h3>
-            <p class="text-sm text-muted flex items-center gap-1.5 mb-4">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.7-7-11a7 7 0 0114 0c0 5.3-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-              Central Business District, Abuja</p>
-            <div class="flex items-center gap-4 text-sm text-muted border-y border-mist py-3 mb-4">
-              <span class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V5h8v16M13 9h6v12"/></svg>8 Floors</span>
-              <span class="flex items-center gap-1.5"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3h18v18H3z"/></svg>3,200 m²</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="font-serif text-2xl font-semibold text-navy">₦1.2B</span>
-              <button data-inquire="Meridian Office Plaza" class="btn btn-ghost !py-2 !px-4 !text-sm">Inquire</button>
-            </div>
-          </div>
-        </article>
-      </div>
+      <div id="featured-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7"></div>
     </div>
   </section>
 
@@ -471,6 +401,11 @@
       </form>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/data.js"></script>
+
+  <script src="assets/js/home.js"></script>
 
   <script src="assets/js/main.js"></script>
 </body>

@@ -102,72 +102,29 @@
     overlay.classList.remove('open');
     document.body.style.overflow = '';
   };
-  document.querySelectorAll('[data-inquire]').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal(btn.dataset.inquire);
-    });
+  // Delegated so dynamically-rendered cards (products.js / property.js) work too.
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-inquire]');
+    if (!btn) return;
+    e.preventDefault();
+    openModal(btn.dataset.inquire);
   });
+  // Expose for other scripts that want to open the inquiry modal programmatically.
+  window.GHOpenInquiry = openModal;
   if (overlay) {
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
     overlay.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', closeModal));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   }
 
-  /* ---- Products filtering ---- */
-  const grid = document.getElementById('property-grid');
-  if (grid) {
-    const cards = Array.from(grid.querySelectorAll('[data-category]'));
-    const chips = document.querySelectorAll('[data-filter]');
-    const locationSel = document.getElementById('filter-location');
-    const priceSel = document.getElementById('filter-price');
-    const sortSel = document.getElementById('filter-sort');
-    const countEl = document.getElementById('result-count');
-    const emptyEl = document.getElementById('empty-state');
-    let activeCat = 'all';
+  /* ---- Products filtering is handled by products.js (dynamic, data-driven) ---- */
 
-    const apply = () => {
-      const loc = locationSel ? locationSel.value : 'all';
-      const price = priceSel ? priceSel.value : 'all';
-      let visible = 0;
-      cards.forEach((c) => {
-        const okCat = activeCat === 'all' || c.dataset.category === activeCat;
-        const okLoc = loc === 'all' || c.dataset.location === loc;
-        const p = parseInt(c.dataset.price, 10);
-        let okPrice = true;
-        if (price === 'lt100') okPrice = p < 100000000;
-        else if (price === '100-300') okPrice = p >= 100000000 && p <= 300000000;
-        else if (price === 'gt300') okPrice = p > 300000000;
-        const show = okCat && okLoc && okPrice;
-        c.style.display = show ? '' : 'none';
-        if (show) visible++;
-      });
-      if (countEl) countEl.textContent = visible;
-      if (emptyEl) emptyEl.classList.toggle('hidden', visible !== 0);
-    };
-
-    const sort = () => {
-      if (!sortSel) return;
-      const v = sortSel.value;
-      const sorted = cards.slice().sort((a, b) => {
-        if (v === 'price-asc') return a.dataset.price - b.dataset.price;
-        if (v === 'price-desc') return b.dataset.price - a.dataset.price;
-        return a.dataset.index - b.dataset.index;
-      });
-      sorted.forEach((c) => grid.appendChild(c));
-    };
-
-    chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        chips.forEach((c) => c.classList.remove('chip-active'));
-        chip.classList.add('chip-active');
-        activeCat = chip.dataset.filter;
-        apply();
-      });
-    });
-    [locationSel, priceSel].forEach((s) => s && s.addEventListener('change', apply));
-    sortSel && sortSel.addEventListener('change', () => { sort(); apply(); });
-    apply();
+  /* ---- Hero video: fade in when it starts playing (no poster flash) ---- */
+  const heroVideo = document.getElementById('hero-video');
+  if (heroVideo) {
+    const showVideo = () => { heroVideo.classList.remove('opacity-0'); heroVideo.classList.add('opacity-100'); };
+    if (heroVideo.readyState >= 2) showVideo();
+    ['loadeddata', 'canplay', 'playing'].forEach((ev) => heroVideo.addEventListener(ev, showVideo, { once: false }));
   }
 
   /* ---- Appointment time-slot picker ---- */

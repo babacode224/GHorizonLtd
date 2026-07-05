@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — G Horizon Property Manager</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { navy:{DEFAULT:'#1e3a8a',deep:'#122a6b',ink:'#0c1f52'}, sky:{DEFAULT:'#3b82f6',light:'#60a5fa',tint:'#eff4ff'}, gold:{DEFAULT:'#c9a24b',soft:'#e7d6ac'}, mist:'#f3f4f6' },
+      fontFamily: { serif:['Cormorant','Georgia','serif'], sans:['Inter','system-ui','sans-serif'] },
+      maxWidth: { container:'1200px' } } } };
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="antialiased bg-mist min-h-screen">
+
+  <!-- Top bar -->
+  <header class="bg-navy-ink text-white sticky top-0 z-40">
+    <div class="max-w-container mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="grid place-items-center w-9 h-9 rounded-sm bg-white text-navy font-serif text-lg">G</span>
+        <div class="leading-tight">
+          <span class="block font-serif text-lg font-semibold">Property Manager</span>
+          <span class="block text-[.6rem] uppercase tracking-[.2em] text-gold-soft">G Horizon Admin</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="user-email" class="hidden sm:inline text-xs text-white/70 mr-1"></span>
+        <a href="products.html" target="_blank" class="text-sm px-4 py-2 rounded-md border border-white/20 hover:bg-white/10 transition-colors">View site ↗</a>
+        <button id="btn-export" class="text-sm px-4 py-2 rounded-md bg-sky hover:bg-sky-light transition-colors font-medium">Export JSON</button>
+        <button id="btn-seed" class="hidden text-sm px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 transition-colors">Load sample data</button>
+        <button id="btn-reset" class="text-sm px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 transition-colors">Reset</button>
+        <button id="btn-logout" class="hidden text-sm px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 transition-colors">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== LOGIN SCREEN (shown when Supabase is on and not signed in) ===== -->
+  <div id="login-screen" class="hidden fixed inset-0 z-50 bg-navy-ink/95 backdrop-blur flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-2xl w-full max-w-sm p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="grid place-items-center w-10 h-10 rounded-sm bg-navy text-white font-serif text-lg">G</span>
+        <div class="leading-tight">
+          <span class="block font-serif text-lg font-semibold text-navy">Admin sign in</span>
+          <span class="block text-[.6rem] uppercase tracking-[.2em] text-gold">G Horizon</span>
+        </div>
+      </div>
+      <form id="login-form" class="space-y-4">
+        <div><label class="field-label" for="login-email">Email</label><input id="login-email" type="email" class="field" required autocomplete="username" /></div>
+        <div><label class="field-label" for="login-password">Password</label><input id="login-password" type="password" class="field" required autocomplete="current-password" /></div>
+        <button type="submit" class="btn btn-primary w-full">Sign in</button>
+        <p id="login-error" class="hidden text-sm text-red-600 text-center"></p>
+      </form>
+      <p class="text-xs text-muted mt-5 text-center">Staff accounts are created in your Supabase dashboard → Authentication → Users.</p>
+    </div>
+  </div>
+
+  <!-- Notice -->
+  <div id="mode-notice" class="bg-gold-soft/60 text-[#5b4a1e] text-sm">
+    <div class="max-w-container mx-auto px-5 lg:px-8 py-2.5">
+      Connecting…
+    </div>
+  </div>
+
+  <main id="manager" class="max-w-container mx-auto px-5 lg:px-8 py-8 grid lg:grid-cols-5 gap-8">
+
+    <!-- ===== List ===== -->
+    <section class="lg:col-span-2 order-2 lg:order-1">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-serif text-2xl font-semibold text-navy">Listings <span id="list-count" class="text-muted text-lg font-sans">(0)</span></h2>
+        <button id="btn-new" class="btn btn-primary !py-2 !px-4 !text-sm">+ New</button>
+      </div>
+      <div id="admin-list" class="space-y-3"></div>
+    </section>
+
+    <!-- ===== Form ===== -->
+    <section class="lg:col-span-3 order-1 lg:order-2">
+      <div class="bg-white rounded-lg border border-mist shadow-sm p-6 lg:p-8">
+        <h2 id="form-title" class="font-serif text-2xl font-semibold text-navy mb-6">Add a property</h2>
+        <form id="prop-form" class="space-y-5">
+          <input type="hidden" id="f-id" />
+
+          <div>
+            <label class="field-label" for="f-title">Title *</label>
+            <input id="f-title" class="field" required placeholder="e.g. The Maple Residence" />
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-4">
+            <div>
+              <label class="field-label" for="f-category">Category *</label>
+              <select id="f-category" class="field">
+                <option value="house">House</option>
+                <option value="land">Land Plot</option>
+                <option value="commercial">Commercial</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="f-type">Listing *</label>
+              <select id="f-type" class="field">
+                <option value="sale">For Sale</option>
+                <option value="rent">For Rent</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="f-status">Status *</label>
+              <select id="f-status" class="field">
+                <option value="available">Available</option>
+                <option value="sold">Sold</option>
+                <option value="rented">Rented</option>
+                <option value="coming-soon">Coming Soon</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-4">
+            <div>
+              <label class="field-label" for="f-price">Price (₦) *</label>
+              <input id="f-price" type="number" min="0" class="field" required placeholder="450000000" />
+            </div>
+            <div>
+              <label class="field-label" for="f-rentPeriod">Rent period</label>
+              <select id="f-rentPeriod" class="field">
+                <option value="year">per year</option>
+                <option value="month">per month</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="f-city">City *</label>
+              <select id="f-city" class="field">
+                <option value="lagos">Lagos</option>
+                <option value="abuja">Abuja</option>
+                <option value="port-harcourt">Port Harcourt</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="field-label" for="f-location">Location (display) *</label>
+            <input id="f-location" class="field" required placeholder="e.g. Banana Island, Lagos" />
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-4">
+            <div><label class="field-label" for="f-beds">Bedrooms</label><input id="f-beds" type="number" min="0" class="field" placeholder="4" /></div>
+            <div><label class="field-label" for="f-baths">Bathrooms</label><input id="f-baths" type="number" min="0" class="field" placeholder="5" /></div>
+            <div><label class="field-label" for="f-size">Size</label><input id="f-size" class="field" placeholder="620 m²" /></div>
+          </div>
+
+          <div>
+            <label class="field-label" for="f-description">Description</label>
+            <textarea id="f-description" rows="4" class="field" placeholder="Full description of the property…"></textarea>
+          </div>
+
+          <div>
+            <label class="field-label" for="f-features">Features (one per line)</label>
+            <textarea id="f-features" rows="4" class="field" placeholder="Infinity pool&#10;24/7 security&#10;Fitted kitchen"></textarea>
+          </div>
+
+          <!-- YouTube -->
+          <div>
+            <label class="field-label" for="f-youtube">YouTube video link (tour)</label>
+            <input id="f-youtube" class="field" placeholder="https://www.youtube.com/watch?v=…" />
+            <p class="text-xs text-muted mt-1">Paste the full YouTube link — it will play on the property page.</p>
+          </div>
+
+          <!-- Images -->
+          <div>
+            <span class="field-label">Images</span>
+            <div class="flex flex-col sm:flex-row gap-3 mb-3">
+              <input id="f-image-url" class="field flex-1" placeholder="Paste an image URL…" />
+              <button type="button" id="btn-add-url" class="btn btn-ghost !py-2 !px-4 !text-sm shrink-0">Add URL</button>
+              <label class="btn btn-ghost !py-2 !px-4 !text-sm shrink-0 cursor-pointer">Upload files
+                <input id="f-image-file" type="file" accept="image/*" multiple class="sr-only" />
+              </label>
+            </div>
+            <p class="text-xs text-muted mb-3">First image is the cover. Uploaded files are stored in-browser (keep total under ~4 MB).</p>
+            <div id="img-list" class="flex flex-wrap gap-3"></div>
+          </div>
+
+          <label class="flex items-center gap-2.5 cursor-pointer">
+            <input id="f-featured" type="checkbox" class="w-4 h-4 accent-navy" />
+            <span class="text-sm font-medium text-ink">Feature on homepage / top of listings</span>
+          </label>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button type="submit" class="btn btn-primary">Save property</button>
+            <button type="button" id="btn-clear" class="btn btn-ghost">Clear</button>
+            <button type="button" id="btn-delete" class="btn hidden !bg-red-50 !text-red-700 !border !border-red-200 hover:!bg-red-100">Delete</button>
+            <span id="save-note" class="hidden self-center text-sm text-green-600 font-medium">Saved ✓</span>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- hidden helper for export download -->
+  <a id="dl-anchor" class="hidden"></a>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
