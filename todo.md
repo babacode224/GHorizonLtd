@@ -50,4 +50,4 @@
 - [x] Improve responsive image loading, loading placeholders, and error fallbacks across listing cards and detail galleries.
 - [x] Validate the empty public catalogue, direct admin creation path, optimized images, and regression suite.
 - [x] Publish a temporary image-bearing property through `/admin`, verify the optimized public card and gallery, and remove it.
-- [ ] Save the clean-slate release checkpoint and push the completed project to the original GitHub repository.
+- [x] Save the clean-slate release checkpoint and push the completed project to the original GitHub repository.
