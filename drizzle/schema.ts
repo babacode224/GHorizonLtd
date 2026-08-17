@@ -161,7 +161,7 @@ export const contactRequests = mysqlTable(
   "contact_requests",
   {
     id: int("id").autoincrement().primaryKey(),
-    intent: mysqlEnum("intent", ["buy", "sell", "consult"]).notNull(),
+    intent: mysqlEnum("intent", ["buy", "sell", "rent_out", "lease_out", "build", "consult"]).notNull(),
     fullName: varchar("fullName", { length: 120 }).notNull(),
     phone: varchar("phone", { length: 32 }).notNull(),
     email: varchar("email", { length: 320 }).notNull(),

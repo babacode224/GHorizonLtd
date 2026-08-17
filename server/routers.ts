@@ -118,7 +118,7 @@ export const appRouter = router({
   contact: router({
     submitRequest: publicProcedure
       .input(z.object({
-        intent: z.enum(["buy", "sell", "consult"]),
+        intent: z.enum(["buy", "sell", "rent_out", "lease_out", "build", "consult"]),
         fullName: z.string().trim().min(2).max(120),
         phone: z.string().trim().min(7).max(32),
         email: z.string().email().max(320),

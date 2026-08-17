@@ -1,0 +1,1 @@
+ALTER TABLE `contact_requests` MODIFY COLUMN `intent` enum('buy','sell','rent_out','lease_out','build','consult') NOT NULL;

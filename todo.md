@@ -18,3 +18,7 @@
 - [x] Compare every public route with the live g-horizon-ltd.vercel.app reference at desktop and mobile widths.
 - [x] Correct source-content, typography, spacing, navigation, footer, and interaction differences found during the live-reference audit.
 - [x] Re-verify the corrected experience against the reference and run regression tests before delivering a revised checkpoint.
+- [x] Add home-building consultancy and end-to-end delivery as an explicit G Horizon service.
+- [x] Add direct Contact Us calls to action for property sales, leasing, and rental representation.
+- [x] Update the Contact Us form to clearly support building, selling, leasing, and rental requests.
+- [x] Validate the expanded service messaging and Contact Us conversion paths before saving a checkpoint.
