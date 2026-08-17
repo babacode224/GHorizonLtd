@@ -51,3 +51,6 @@
 - [x] Validate the empty public catalogue, direct admin creation path, optimized images, and regression suite.
 - [x] Publish a temporary image-bearing property through `/admin`, verify the optimized public card and gallery, and remove it.
 - [x] Save the clean-slate release checkpoint and push the completed project to the original GitHub repository.
+- [x] Confirm the completed release commit and current main-branch commit before the authorized replacement.
+- [x] Force-push the completed GHorizon platform release directly to the original repository main branch.
+- [x] Verify the original repository main branch now points to the completed platform release.
