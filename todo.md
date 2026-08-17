@@ -22,3 +22,5 @@
 - [x] Add direct Contact Us calls to action for property sales, leasing, and rental representation.
 - [x] Update the Contact Us form to clearly support building, selling, leasing, and rental requests.
 - [x] Validate the expanded service messaging and Contact Us conversion paths before saving a checkpoint.
+- [x] Diagnose and fix the homepage public-listing tRPC fetch failure.
+- [x] Verify the corrected API query and homepage loading path without regressions.
