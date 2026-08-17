@@ -54,3 +54,8 @@
 - [x] Confirm the completed release commit and current main-branch commit before the authorized replacement.
 - [x] Force-push the completed GHorizon platform release directly to the original repository main branch.
 - [x] Verify the original repository main branch now points to the completed platform release.
+- [x] Identify the Vercel deployment failure and Manus-runtime dependencies exposed by the supplied error output.
+- [x] Add Vercel-compatible build, routing, and serverless runtime configuration.
+- [x] Document the production database, storage, map, and auth environment requirements for Vercel.
+- [x] Validate the Vercel deployment build, serverless entrypoint bundle, and API smoke test.
+- [ ] Push the Vercel compatibility fix to the GitHub main branch.

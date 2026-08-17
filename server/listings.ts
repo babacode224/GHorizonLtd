@@ -143,7 +143,9 @@ async function attachImages(rows: Listing[]) {
 
 export async function listPublicListings(filters: ListingFilters) {
   const db = await getDb();
-  if (!db) throw new Error("Database unavailable");
+  // Enables the public SPA to render a clean empty catalogue on external hosts
+  // until its production database environment variable has been configured.
+  if (!db) return [];
   const conditions = [eq(listings.kind, filters.kind), eq(listings.status, "approved")];
   if (filters.purpose) conditions.push(eq(listings.purpose, filters.purpose));
   if (filters.propertyType) conditions.push(eq(listings.propertyType, filters.propertyType));
@@ -162,7 +164,7 @@ export async function listPublicListings(filters: ListingFilters) {
 
 export async function getPublicListingBySlug(kind: "property" | "vehicle", slug: string) {
   const db = await getDb();
-  if (!db) throw new Error("Database unavailable");
+  if (!db) return null;
   const rows = await db
     .select()
     .from(listings)
@@ -173,7 +175,7 @@ export async function getPublicListingBySlug(kind: "property" | "vehicle", slug:
 
 export async function listAdminListings(status?: "pending" | "approved" | "rejected") {
   const db = await getDb();
-  if (!db) throw new Error("Database unavailable");
+  if (!db) return [];
   const rows = await db
     .select()
     .from(listings)
@@ -184,7 +186,7 @@ export async function listAdminListings(status?: "pending" | "approved" | "rejec
 
 export async function getAdminListing(id: number) {
   const db = await getDb();
-  if (!db) throw new Error("Database unavailable");
+  if (!db) return null;
   const rows = await db.select().from(listings).where(eq(listings.id, id)).limit(1);
   if (!rows[0]) return null;
   const documents = await db.select().from(listingDocuments).where(eq(listingDocuments.listingId, id));
