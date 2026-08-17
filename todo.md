@@ -15,3 +15,6 @@
 - [x] Add automated tests for status enforcement, authorization, filtering, and upload validation.
 - [x] Verify responsive visual fidelity, public visibility controls, and key user workflows.
 - [x] Save a final project checkpoint and provide delivery and publishing guidance.
+- [x] Compare every public route with the live g-horizon-ltd.vercel.app reference at desktop and mobile widths.
+- [x] Correct source-content, typography, spacing, navigation, footer, and interaction differences found during the live-reference audit.
+- [x] Re-verify the corrected experience against the reference and run regression tests before delivering a revised checkpoint.
