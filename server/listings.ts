@@ -27,6 +27,8 @@ export type CreateListingInput = {
   price: number;
   location: string;
   city?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
   purpose?: "sale" | "rent" | "lease" | "let" | null;
   featured?: boolean;
   youtubeUrl?: string | null;
@@ -226,6 +228,8 @@ export async function createListing(input: CreateListingInput, actorUserId: numb
     price: String(input.price),
     location: input.location.trim(),
     city: nullable(input.city),
+    latitude: input.latitude === null || input.latitude === undefined ? null : String(input.latitude),
+    longitude: input.longitude === null || input.longitude === undefined ? null : String(input.longitude),
     youtubeVideoId: extractYouTubeVideoId(input.youtubeUrl),
     propertyType: input.propertyType ?? null,
     propertyTitleType: input.propertyTitleType ?? null,

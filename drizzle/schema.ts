@@ -68,6 +68,8 @@ export const listings = mysqlTable(
     price: decimal("price", { precision: 18, scale: 2 }).notNull(),
     location: varchar("location", { length: 220 }).notNull(),
     city: varchar("city", { length: 120 }),
+    latitude: decimal("latitude", { precision: 10, scale: 7 }),
+    longitude: decimal("longitude", { precision: 10, scale: 7 }),
     youtubeVideoId: varchar("youtubeVideoId", { length: 32 }),
 
     propertyType: mysqlEnum("propertyType", propertyTypes),

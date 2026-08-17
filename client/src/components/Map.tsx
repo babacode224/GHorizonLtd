@@ -76,7 +76,7 @@
 
 /// <reference types="@types/google.maps" />
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { usePersistFn } from "@/hooks/usePersistFn";
 import { cn } from "@/lib/utils";
 
@@ -92,18 +92,20 @@ const FORGE_BASE_URL =
   "https://forge.butterfly-effect.dev";
 const MAPS_PROXY_URL = `${FORGE_BASE_URL}/v1/maps/proxy`;
 
-function loadMapScript() {
-  return new Promise(resolve => {
+function loadMapScript(): Promise<void> {
+  if (window.google?.maps) return Promise.resolve();
+  return new Promise((resolve, reject) => {
     const script = document.createElement("script");
-    script.src = `${MAPS_PROXY_URL}/maps/api/js?key=${API_KEY}&v=weekly&libraries=marker,places,geocoding,geometry`;
+    script.src = `${MAPS_PROXY_URL}/maps/api/js?key=${API_KEY}&origin=${encodeURIComponent(window.location.origin)}&v=weekly&libraries=marker,places,geocoding,geometry`;
     script.async = true;
     script.crossOrigin = "anonymous";
     script.onload = () => {
-      resolve(null);
+      resolve();
       script.remove(); // Clean up immediately
     };
     script.onerror = () => {
-      console.error("Failed to load Google Maps script");
+      reject(new Error("Failed to load Google Maps script"));
+      script.remove();
     };
     document.head.appendChild(script);
   });
@@ -114,6 +116,8 @@ interface MapViewProps {
   initialCenter?: google.maps.LatLngLiteral;
   initialZoom?: number;
   onMapReady?: (map: google.maps.Map) => void;
+  onMapError?: () => void;
+  fallback?: ReactNode;
 }
 
 export function MapView({
@@ -121,12 +125,21 @@ export function MapView({
   initialCenter = { lat: 37.7749, lng: -122.4194 },
   initialZoom = 12,
   onMapReady,
+  onMapError,
+  fallback,
 }: MapViewProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<google.maps.Map | null>(null);
+  const [loadError, setLoadError] = useState(false);
 
   const init = usePersistFn(async () => {
-    await loadMapScript();
+    try {
+      await loadMapScript();
+    } catch {
+      setLoadError(true);
+      onMapError?.();
+      return;
+    }
     if (!mapContainer.current) {
       console.error("Map container not found");
       return;
@@ -149,7 +162,6 @@ export function MapView({
     init();
   }, [init]);
 
-  return (
-    <div ref={mapContainer} className={cn("w-full h-[500px]", className)} />
-  );
+  if (loadError) return <>{fallback ?? <div className={cn("grid w-full place-items-center bg-slate-100 text-sm text-slate-500", className)}>Map preview is unavailable.</div>}</>;
+  return <div className={cn("relative w-full overflow-hidden", className)}><div className="absolute inset-0">{fallback}</div><div ref={mapContainer} className="absolute inset-0" /></div>;
 }

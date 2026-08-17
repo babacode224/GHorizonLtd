@@ -2,6 +2,7 @@ import { CheckCircle2, ChevronRight, FileUp, Loader2, ShieldCheck } from "lucide
 import { useState } from "react";
 import type { InputHTMLAttributes } from "react";
 import { trpc } from "@/lib/trpc";
+import { PropertyMapPicker, type PropertyCoordinate } from "@/components/ghorizon/PropertyMapPicker";
 
 type Kind = "property" | "vehicle";
 type Upload = {
@@ -92,6 +93,8 @@ function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: {
   const [images, setImages] = useState<Upload[]>([]);
   const [documents, setDocuments] = useState<Upload[]>([]);
   const [clearingPaper, setClearingPaper] = useState<Upload | undefined>();
+  const [coordinate, setCoordinate] = useState<PropertyCoordinate | null>(null);
+  const [mapMissing, setMapMissing] = useState(false);
   const field = "w-full border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-[#3b82f6] focus:ring-4 focus:ring-blue-100";
   const labelClass = "mb-1.5 block text-xs font-bold uppercase tracking-[0.12em] text-slate-500";
 
@@ -109,6 +112,7 @@ function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: {
 
   function submitForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (adminMode && kind === "property" && !coordinate) { setMapMissing(true); return; }
     const data = new FormData(event.currentTarget);
     const base = {
       kind,
@@ -132,6 +136,8 @@ function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: {
       propertyTitleType: String(data.get("propertyTitleType")),
       landmarks: String(data.get("landmarks") ?? ""),
       estateName: String(data.get("estateName") ?? ""),
+      latitude: coordinate?.lat,
+      longitude: coordinate?.lng,
       propertyCondition: String(data.get("propertyCondition") ?? "") || undefined,
       furnishing: String(data.get("furnishing") ?? "") || undefined,
       sizeSqm: data.get("sizeSqm") ? Number(data.get("sizeSqm")) : undefined,
@@ -194,6 +200,7 @@ function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: {
             <Select label="Listing purpose" name="purpose" className={field} labelClass={labelClass} options={[["sale", "For Sale"], ["rent", "For Rent"], ["let", "To Let"], ["lease", "For Lease"]]} />
             {kind === "property" ? <PropertyFields field={field} labelClass={labelClass} /> : <VehicleFields field={field} labelClass={labelClass} />}
           </div>
+          {adminMode && kind === "property" && <div className="mt-6"><PropertyMapPicker value={coordinate} onChange={(nextCoordinate) => { setCoordinate(nextCoordinate); setMapMissing(false); }} />{mapMissing && <p className="mt-2 text-sm font-semibold text-red-700">Select an exact map location before publishing this property.</p>}</div>}
           <div className="mt-4"><label className={labelClass}>Description</label><textarea name="description" rows={5} className={field} placeholder="Share the important details of this listing." /></div>
           {kind === "property" && <div className="mt-4"><label className={labelClass}>Features & amenities (one per line)</label><textarea name="features" rows={5} className={field} placeholder={"24/7 security\nFitted kitchen\nBackup power\nSwimming pool\nWater treatment plant"} /></div>}
           <div className="mt-4"><Field label="YouTube video tour URL" name="youtubeUrl" type="url" className={field} labelClass={labelClass} /><p className="mt-1 text-xs text-slate-500">Paste the public YouTube URL. The video will be shown above the photo gallery on the public property page.</p></div>

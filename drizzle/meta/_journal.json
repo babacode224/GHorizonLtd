@@ -29,6 +29,13 @@
       "when": 1787001399688,
       "tag": "0003_fluffy_lady_bullseye",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1787002271788,
+      "tag": "0004_secret_warstar",
+      "breakpoints": true
     }
   ]
 }

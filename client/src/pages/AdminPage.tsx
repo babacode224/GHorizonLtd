@@ -8,7 +8,7 @@ type Status = "pending" | "approved" | "rejected";
 type WorkspaceView = "library" | "publish";
 
 export default function AdminPage() {
-  const [view, setView] = useState<WorkspaceView>("library");
+  const [view, setView] = useState<WorkspaceView>(() => window.location.pathname === "/admin/upload" ? "publish" : "library");
   const [status, setStatus] = useState<Status | "all">("all");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const allListings = trpc.admin.list.useQuery({});

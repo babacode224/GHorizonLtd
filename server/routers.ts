@@ -52,6 +52,8 @@ const propertySubmission = z.object({
   propertyTitleType: propertyTitle,
   landmarks: z.string().trim().max(1_000).optional().or(z.literal("")),
   estateName: z.string().trim().max(180).optional().or(z.literal("")),
+  latitude: z.number().min(-90).max(90).optional(),
+  longitude: z.number().min(-180).max(180).optional(),
   propertyCondition: propertyCondition.optional(),
   furnishing: furnishing.optional(),
   sizeSqm: z.number().nonnegative().optional(),

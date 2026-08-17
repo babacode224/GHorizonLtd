@@ -11,6 +11,8 @@ export type PublicListing = {
   displayPrice: number;
   location: string;
   city: string | null;
+  latitude?: number | string | null;
+  longitude?: number | string | null;
   description: string | null;
   propertyType: "land" | "house" | "apartment" | "commercial" | null;
   bedrooms: number | null;
