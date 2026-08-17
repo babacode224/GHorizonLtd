@@ -39,6 +39,8 @@
 - [x] Verify direct admin creation with stored image media and a YouTube URL, confirm video-first public rendering, and remove the temporary validation record.
 - [x] Review the available map component and map-integration guidance for the property-location workflow.
 - [x] Add validated latitude and longitude storage to property listings.
-- [ ] Verify the interactive exact-location picker on the published project domain and retain coordinate-entry fallback for preview environments.
-- [ ] Verify the saved property coordinate renders an in-page map marker on the published public detail page.
-- [ ] Complete end-to-end map-location validation through the `/admin` interface and save the final map-enabled checkpoint.
+- [x] Verify the interactive exact-location picker on the published project domain and retain coordinate-entry fallback for preview environments.
+- [x] Verify the saved property coordinate renders an in-page map marker on the published public detail page.
+- [x] Complete end-to-end map-location validation through the `/admin` interface and save the final map-enabled checkpoint.
+- [x] Publish a temporary property through the live `/admin` form using saved coordinates, verify its public map pin, and remove it immediately.
+- [x] Save the final map-enabled checkpoint after the live UI validation.

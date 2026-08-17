@@ -16,7 +16,7 @@ export function PropertyMapPicker({ value, onChange }: { value: PropertyCoordina
   const [latitude, setLatitude] = useState(value ? String(value.lat) : "");
   const [longitude, setLongitude] = useState(value ? String(value.lng) : "");
   const [mapUnavailable, setMapUnavailable] = useState(false);
-  const activeCoordinate = value ?? (Number.isFinite(Number(latitude)) && Number.isFinite(Number(longitude)) ? { lat: Number(latitude), lng: Number(longitude) } : LAGOS_CENTER);
+  const activeCoordinate = value ?? (latitude.trim() !== "" && longitude.trim() !== "" && Number.isFinite(Number(latitude)) && Number.isFinite(Number(longitude)) ? { lat: Number(latitude), lng: Number(longitude) } : LAGOS_CENTER);
   const setLocation = async (coordinate: PropertyCoordinate, recenter = true) => {
     const map = mapRef.current;
     if (!map || !window.google) return;
@@ -28,7 +28,7 @@ export function PropertyMapPicker({ value, onChange }: { value: PropertyCoordina
   const commitCoordinates = (nextLatitude: string, nextLongitude: string) => {
     setLatitude(nextLatitude); setLongitude(nextLongitude);
     const coordinate = { lat: Number(nextLatitude), lng: Number(nextLongitude) };
-    if (Number.isFinite(coordinate.lat) && Number.isFinite(coordinate.lng) && coordinate.lat >= -90 && coordinate.lat <= 90 && coordinate.lng >= -180 && coordinate.lng <= 180) { onChange(coordinate); void setLocation(coordinate); }
+    if (nextLatitude.trim() !== "" && nextLongitude.trim() !== "" && Number.isFinite(coordinate.lat) && Number.isFinite(coordinate.lng) && coordinate.lat >= -90 && coordinate.lat <= 90 && coordinate.lng >= -180 && coordinate.lng <= 180) { onChange(coordinate); void setLocation(coordinate); }
   };
   const searchMaps = () => { if (query.trim()) window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query.trim())}`, "_blank", "noopener,noreferrer"); };
 
