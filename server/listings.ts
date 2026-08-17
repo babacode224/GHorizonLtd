@@ -9,7 +9,6 @@ import {
 import { getDb } from "./db";
 import { extractYouTubeVideoId, statusForCreation, toSlug } from "./listingPolicy";
 import { storagePut } from "./storage";
-import { filterSourceProperties, sourcePropertyCatalog } from "./sourceCatalog";
 
 export type UploadedFileInput = {
   fileName: string;
@@ -158,17 +157,7 @@ export async function listPublicListings(filters: ListingFilters) {
     conditions.push(or(like(listings.sourceTitle, query), like(listings.location, query), like(listings.make, query), like(listings.model, query))!);
   }
   const rows = await db.select().from(listings).where(and(...conditions)).orderBy(desc(listings.featured), desc(listings.createdAt));
-  const managedListings = await attachImages(rows);
-  if (filters.kind !== "property") return managedListings;
-  if (filters.purpose === "lease" || filters.purpose === "let") return managedListings;
-  return [...managedListings, ...filterSourceProperties({
-    purpose: filters.purpose,
-    propertyType: filters.propertyType,
-    city: filters.city,
-    minPrice: filters.minPrice,
-    maxPrice: filters.maxPrice,
-    query: filters.query,
-  })];
+  return attachImages(rows);
 }
 
 export async function getPublicListingBySlug(kind: "property" | "vehicle", slug: string) {
@@ -179,10 +168,7 @@ export async function getPublicListingBySlug(kind: "property" | "vehicle", slug:
     .from(listings)
     .where(and(eq(listings.kind, kind), eq(listings.slug, slug), eq(listings.status, "approved")))
     .limit(1);
-  const persisted = (await attachImages(rows))[0] ?? null;
-  if (persisted) return persisted;
-  if (kind === "property") return sourcePropertyCatalog.find((listing) => listing.slug === slug) ?? null;
-  return null;
+  return (await attachImages(rows))[0] ?? null;
 }
 
 export async function listAdminListings(status?: "pending" | "approved" | "rejected") {

@@ -56,12 +56,3 @@ export function priceLabel(listing: Pick<PublicListing, "displayPrice" | "purpos
   const base = currency.format(listing.displayPrice);
   return listing.purpose === "rent" || listing.purpose === "let" || listing.purpose === "lease" ? `${base}/${listing.rentPeriod === "month" ? "mo" : "yr"}` : base;
 }
-
-export function listingImage(listing: Pick<PublicListing, "images" | "kind">) {
-  return (
-    listing.images[0]?.url ??
-    (listing.kind === "property"
-      ? "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85"
-      : "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85")
-  );
-}

@@ -44,3 +44,10 @@
 - [x] Complete end-to-end map-location validation through the `/admin` interface and save the final map-enabled checkpoint.
 - [x] Publish a temporary property through the live `/admin` form using saved coordinates, verify its public map pin, and remove it immediately.
 - [x] Save the final map-enabled checkpoint after the live UI validation.
+- [x] Audit database listing/media records, public fallback data, image components, and the original GitHub remote.
+- [x] Remove all demonstration listing and listing-media records for a clean catalogue.
+- [x] Remove public source-catalogue fallback records so only future admin-created properties appear.
+- [x] Improve responsive image loading, loading placeholders, and error fallbacks across listing cards and detail galleries.
+- [x] Validate the empty public catalogue, direct admin creation path, optimized images, and regression suite.
+- [x] Publish a temporary image-bearing property through `/admin`, verify the optimized public card and gallery, and remove it.
+- [ ] Save the clean-slate release checkpoint and push the completed project to the original GitHub repository.
