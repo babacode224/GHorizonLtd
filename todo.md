@@ -58,4 +58,4 @@
 - [x] Add Vercel-compatible build, routing, and serverless runtime configuration.
 - [x] Document the production database, storage, map, and auth environment requirements for Vercel.
 - [x] Validate the Vercel deployment build, serverless entrypoint bundle, and API smoke test.
-- [ ] Push the Vercel compatibility fix to the GitHub main branch.
+- [x] Push the Vercel compatibility fix to the GitHub main branch.
