@@ -1,33 +1,15 @@
-import { useAuth } from "@/_core/hooks/useAuth";
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import { ArrowRight, BadgeCheck, Building2, Compass, Handshake, Search, ShieldCheck } from "lucide-react";
+import { Link } from "wouter";
+import { SiteFooter, SiteHeader } from "@/components/ghorizon/SiteChrome";
+import { ListingCard } from "@/components/ghorizon/ListingCard";
+import { trpc } from "@/lib/trpc";
+import { type PublicListing } from "@/lib/listingTypes";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Workflow, Frontend Best Practices, Design Guide and Common Pitfalls
- */
+const services = [{ icon: Search, title: "Premium Property Sourcing", text: "We hunt off-market and on-market opportunities across residential, land and commercial — matched precisely to your brief." }, { icon: Compass, title: "Expert Consultancy", text: "Title verification, valuation, investment strategy and transaction management — advisory you can build a portfolio on." }, { icon: Handshake, title: "White-Glove Delivery", text: "From first viewing to final handover, a dedicated advisor manages every detail with discretion and precision." }];
+const steps = [["01", "Discovery & Brief", "We learn your goals, budget and timeline to define a precise mandate."], ["02", "Curated Shortlist", "A handpicked selection of vetted properties, with full due diligence."], ["03", "Inspection & Advisory", "Physical or virtual viewings, valuation guidance and negotiation."], ["04", "Close & Handover", "Documentation, title transfer and a seamless handover of your asset."]];
+
 export default function Home() {
-  // The useAuth hook provides authentication state.
-  // To implement login/logout, call logout(), or start login from an event
-  // handler: onClick={() => startLogin()} (imported from "@/const"). Never call
-  // startLogin() during render (no href={startLogin()}) — it mints a one-time
-  // nonce cookie and must run only at the moment of navigation.
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
-
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
-    </div>
-  );
+  const featured = trpc.listings.publicList.useQuery({ kind: "property" });
+  const listings = ((featured.data ?? []) as PublicListing[]).filter((listing) => listing.featured).slice(0, 3);
+  return <div className="min-h-screen bg-white"><section className="relative isolate min-h-[740px] overflow-hidden bg-[#0c1f52]"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=90" alt="Modern city skyline at sunset" className="absolute inset-0 -z-20 h-full w-full object-cover" /><div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(12,31,82,.48)_0%,rgba(12,31,82,.2)_38%,rgba(12,31,82,.86)_100%)]" /><SiteHeader overHero /><div className="mx-auto flex min-h-[740px] max-w-7xl items-end px-5 pb-20 pt-36 lg:px-8"><div className="max-w-3xl"><p className="eyebrow !text-[#e7d6ac] before:!bg-[#e7d6ac]">Sourcing. Building. Advisory.</p><h1 className="mt-5 max-w-3xl font-display text-6xl leading-[.92] text-white sm:text-7xl lg:text-8xl">Where ambition finds<br />its address.</h1><p className="mt-7 max-w-xl text-lg leading-8 text-white/75">We source, craft and deliver exceptional property — defining where you live and invest.</p><div className="mt-9 flex flex-wrap gap-3"><Link href="/contact" className="bg-white px-5 py-3.5 text-sm font-bold text-[#1e3a8a] transition hover:bg-slate-100">Book a Consultation</Link><Link href="/properties" className="border border-white/45 px-5 py-3.5 text-sm font-bold text-white transition hover:border-white hover:bg-white/10">Explore Properties</Link></div></div></div></section><section className="px-5 py-24 lg:px-8"><div className="mx-auto max-w-7xl"><div className="max-w-2xl"><p className="eyebrow">Why G Horizon</p><h2 className="mt-5 font-display text-5xl leading-tight text-[#0c1f52]">A standard of service that matches the calibre of the asset.</h2></div><div className="mt-14 grid gap-5 md:grid-cols-3">{services.map(({ icon: Icon, title, text }) => <article key={title} className="group border border-slate-200 p-7 transition hover:-translate-y-1 hover:border-transparent hover:shadow-xl"><Icon className="h-7 w-7 text-[#c9a24b]" /><h3 className="mt-6 font-display text-3xl text-[#0c1f52]">{title}</h3><p className="mt-4 leading-7 text-slate-500">{text}</p></article>)}</div></div></section><section className="bg-[#f3f4f6] px-5 py-24 lg:px-8"><div className="mx-auto max-w-7xl"><div className="flex flex-wrap items-end justify-between gap-5"><div><p className="eyebrow">Featured Listings</p><h2 className="mt-4 font-display text-5xl text-[#0c1f52]">Trending properties</h2></div><Link href="/properties" className="inline-flex items-center gap-2 text-sm font-bold text-[#1e3a8a]">View all listings <ArrowRight className="h-4 w-4" /></Link></div>{featured.isLoading ? <p className="py-16 text-center text-slate-500">Loading approved listings…</p> : listings.length ? <div className="mt-10 grid gap-6 md:grid-cols-3">{listings.map((listing) => <ListingCard key={listing.id} listing={listing} />)}</div> : <div className="mt-10 border border-dashed border-slate-300 bg-white px-6 py-16 text-center"><Building2 className="mx-auto h-8 w-8 text-[#c9a24b]" /><p className="mt-4 font-display text-3xl text-[#0c1f52]">Verified listings are on their way.</p><p className="mx-auto mt-3 max-w-lg text-slate-500">Featured properties appear here once they have been reviewed and approved by the G Horizon team.</p></div>}</div></section><section className="px-5 py-24 lg:px-8"><div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1fr_1.15fr]"><div className="relative min-h-[460px] overflow-hidden bg-[#0c1f52]"><img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=1100&q=85" alt="Property plans under review" className="h-full w-full object-cover opacity-80" /></div><div><p className="eyebrow">How we work</p><h2 className="mt-4 font-display text-5xl leading-tight text-[#0c1f52]">From brief to keys, four considered steps.</h2><div className="mt-10 grid gap-6 sm:grid-cols-2">{steps.map(([number, title, text]) => <div key={number} className="border-t border-slate-200 pt-4"><span className="text-xs font-bold tracking-[0.2em] text-[#c9a24b]">{number}</span><h3 className="mt-3 font-display text-2xl text-[#0c1f52]">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-500">{text}</p></div>)}</div><Link href="/services" className="mt-10 inline-flex items-center gap-2 bg-[#1e3a8a] px-5 py-3.5 text-sm font-bold text-white">Explore our services <ArrowRight className="h-4 w-4" /></Link></div></div></section><section className="bg-[#0c1f52] px-5 py-24 lg:px-8"><div className="mx-auto max-w-4xl text-center"><p className="eyebrow !text-[#e7d6ac] before:!bg-[#e7d6ac]">Ready when you are</p><h2 className="mt-5 font-display text-5xl text-white sm:text-6xl">Let&apos;s find the property that fits your future.</h2><p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/75">Book a complimentary consultation with a G Horizon advisor — in person or virtually.</p><div className="mt-9 flex justify-center gap-3"><Link href="/contact" className="bg-white px-5 py-3.5 text-sm font-bold text-[#1e3a8a]">Book a Consultation</Link><Link href="/properties" className="border border-white/40 px-5 py-3.5 text-sm font-bold text-white">Browse Properties</Link></div></div></section><SiteFooter /></div>;
 }
