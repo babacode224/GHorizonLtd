@@ -24,3 +24,6 @@
 - [x] Validate the expanded service messaging and Contact Us conversion paths before saving a checkpoint.
 - [x] Diagnose and fix the homepage public-listing tRPC fetch failure.
 - [x] Verify the corrected API query and homepage loading path without regressions.
+- [x] Prepare and upload the provided CEO, Business Lead, and Legal portraits for the leadership section.
+- [x] Replace the Founder & CEO, Head of Sales, and Legal & Titles portrait images on the About page.
+- [x] Verify the revised leadership grid and save an updated checkpoint.
