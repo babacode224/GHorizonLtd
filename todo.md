@@ -27,3 +27,6 @@
 - [x] Prepare and upload the provided CEO, Business Lead, and Legal portraits for the leadership section.
 - [x] Replace the Founder & CEO, Head of Sales, and Legal & Titles portrait images on the About page.
 - [x] Verify the revised leadership grid and save an updated checkpoint.
+- [x] Replace the placeholder leadership names with Frank Friday, Taiwo Adegoke, and Tope Akpene.
+- [x] Verify the named leadership profiles and save an updated checkpoint.
+- [x] Remove the Lead Consultant card so the leadership section contains only the three designated profiles.
