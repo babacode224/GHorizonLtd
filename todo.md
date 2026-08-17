@@ -59,3 +59,6 @@
 - [x] Document the production database, storage, map, and auth environment requirements for Vercel.
 - [x] Validate the Vercel deployment build, serverless entrypoint bundle, and API smoke test.
 - [x] Push the Vercel compatibility fix to the GitHub main branch.
+- [x] Inspect the external leadership portrait URLs and determine why they fail outside the Manus deployment.
+- [x] Package CEO, Legal & Titles, and Head of Sales portraits for static delivery from the GitHub/Vercel deployment.
+- [ ] Verify all three portraits on the local build and deployed Vercel site, then push the fix to GitHub main.
