@@ -4,7 +4,7 @@ export type PublicListing = {
   id: number;
   slug: string;
   kind: ListingKind;
-  purpose: "sale" | "rent" | null;
+  purpose: "sale" | "rent" | "lease" | "let" | null;
   featured: boolean;
   title: string;
   sourceTitle: string;
@@ -15,8 +15,23 @@ export type PublicListing = {
   propertyType: "land" | "house" | "apartment" | "commercial" | null;
   bedrooms: number | null;
   bathrooms: number | null;
+  toilets?: number | null;
+  parkingSpaces?: number | null;
+  floorNumber?: number | null;
+  totalFloors?: number | null;
+  yearBuilt?: number | null;
+  estateName?: string | null;
+  propertyCondition?: "newly_built" | "renovated" | "fairly_used" | "off_plan" | null;
+  furnishing?: "unfurnished" | "semi_furnished" | "furnished" | null;
   sizeSqm: string | null;
   rentPeriod: "month" | "year" | null;
+  minimumLeaseMonths?: number | null;
+  availableFrom?: Date | string | null;
+  serviceCharge?: number | string | null;
+  securityDeposit?: number | string | null;
+  agencyFee?: number | string | null;
+  legalFee?: number | string | null;
+  cautionFee?: number | string | null;
   features: string[];
   make: string | null;
   model: string | null;
@@ -37,7 +52,7 @@ export const currency = new Intl.NumberFormat("en-NG", {
 
 export function priceLabel(listing: Pick<PublicListing, "displayPrice" | "purpose" | "rentPeriod">) {
   const base = currency.format(listing.displayPrice);
-  return listing.purpose === "rent" ? `${base}/${listing.rentPeriod === "month" ? "mo" : "yr"}` : base;
+  return listing.purpose === "rent" || listing.purpose === "let" || listing.purpose === "lease" ? `${base}/${listing.rentPeriod === "month" ? "mo" : "yr"}` : base;
 }
 
 export function listingImage(listing: Pick<PublicListing, "images" | "kind">) {

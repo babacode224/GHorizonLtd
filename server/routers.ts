@@ -4,9 +4,8 @@ import { COOKIE_NAME } from "@shared/const";
 import { contactRequests, inspectionRequests } from "../drizzle/schema";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
+import { publicProcedure, router } from "./_core/trpc";
 import { getDb } from "./db";
-import { canManageListings } from "./listingPolicy";
 import {
   approveListing,
   createListing,
@@ -22,6 +21,8 @@ import {
 const listingStatus = z.enum(["pending", "approved", "rejected"]);
 const propertyKind = z.enum(["land", "house", "apartment", "commercial"]);
 const propertyTitle = z.enum(["certificate_of_occupancy", "gazette", "survey_plan", "deed_of_assignment", "governors_consent"]);
+const propertyCondition = z.enum(["newly_built", "renovated", "fairly_used", "off_plan"]);
+const furnishing = z.enum(["unfurnished", "semi_furnished", "furnished"]);
 const vehicleCondition = z.enum(["brand_new", "foreign_used", "locally_used"]);
 const uploadFile = z.object({
   fileName: z.string().min(1).max(255),
@@ -38,7 +39,7 @@ const sharedListingFields = {
   price: z.number().positive(),
   location: z.string().trim().min(3).max(220),
   city: z.string().trim().max(120).optional().or(z.literal("")),
-  purpose: z.enum(["sale", "rent"]).optional(),
+  purpose: z.enum(["sale", "rent", "lease", "let"]).optional(),
   youtubeUrl: z.string().url().optional().or(z.literal("")),
   images: z.array(uploadFile).max(10).default([]),
   documents: z.array(uploadFile).max(10).default([]),
@@ -50,10 +51,25 @@ const propertySubmission = z.object({
   propertyType: propertyKind,
   propertyTitleType: propertyTitle,
   landmarks: z.string().trim().max(1_000).optional().or(z.literal("")),
+  estateName: z.string().trim().max(180).optional().or(z.literal("")),
+  propertyCondition: propertyCondition.optional(),
+  furnishing: furnishing.optional(),
   sizeSqm: z.number().nonnegative().optional(),
   bedrooms: z.number().int().nonnegative().max(30).optional(),
   bathrooms: z.number().int().nonnegative().max(30).optional(),
+  toilets: z.number().int().nonnegative().max(30).optional(),
+  parkingSpaces: z.number().int().nonnegative().max(100).optional(),
+  floorNumber: z.number().int().nonnegative().max(200).optional(),
+  totalFloors: z.number().int().nonnegative().max(200).optional(),
+  yearBuilt: z.number().int().min(1800).max(2100).optional(),
   rentPeriod: z.enum(["month", "year"]).optional(),
+  minimumLeaseMonths: z.number().int().positive().max(600).optional(),
+  availableFrom: z.coerce.date().optional(),
+  serviceCharge: z.number().nonnegative().optional(),
+  securityDeposit: z.number().nonnegative().optional(),
+  agencyFee: z.number().nonnegative().optional(),
+  legalFee: z.number().nonnegative().optional(),
+  cautionFee: z.number().nonnegative().optional(),
   features: z.array(z.string().trim().min(1).max(100)).max(30).default([]),
 });
 
@@ -73,12 +89,8 @@ const vehicleSubmission = z.object({
 });
 
 const submissionInput = z.discriminatedUnion("kind", [propertySubmission, vehicleSubmission]);
-const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
-  if (!canManageListings(ctx.user.role)) {
-    throw new TRPCError({ code: "FORBIDDEN", message: "Administrator access is required." });
-  }
-  return next({ ctx });
-});
+/** Direct-management mode is intentionally public at the user's request. */
+const adminProcedure = publicProcedure;
 
 export const appRouter = router({
   system: systemRouter,
@@ -93,7 +105,7 @@ export const appRouter = router({
     publicList: publicProcedure
       .input(z.object({
         kind: z.enum(["property", "vehicle"]),
-        purpose: z.enum(["sale", "rent"]).optional(),
+        purpose: z.enum(["sale", "rent", "lease", "let"]).optional(),
         propertyType: propertyKind.optional(),
         city: z.string().trim().min(1).max(120).optional(),
         minPrice: z.number().nonnegative().optional(),
@@ -163,20 +175,20 @@ export const appRouter = router({
         adminNotes: z.string().trim().max(8_000).optional(),
         featured: z.boolean().optional(),
       }))
-      .mutation(({ input, ctx }) => approveListing(input.id, ctx.user.id, input)),
+      .mutation(({ input }) => approveListing(input.id, null, input)),
     reject: adminProcedure
       .input(z.object({ id: z.number().int().positive(), reason: z.string().trim().min(5).max(2_000) }))
-      .mutation(async ({ input, ctx }) => {
-        await rejectListing(input.id, ctx.user.id, input.reason);
+      .mutation(async ({ input }) => {
+        await rejectListing(input.id, null, input.reason);
         return { success: true };
       }),
-    delete: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input, ctx }) => {
-      await deleteListing(input.id, ctx.user.id);
+    delete: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input }) => {
+      await deleteListing(input.id, null);
       return { success: true };
     }),
     directCreate: adminProcedure
       .input(z.object({ listing: submissionInput, featured: z.boolean().default(false) }))
-      .mutation(({ input, ctx }) => createListing({ ...input.listing, featured: input.featured } as CreateListingInput, ctx.user.id, true)),
+      .mutation(({ input }) => createListing({ ...input.listing, featured: input.featured } as CreateListingInput, null, true)),
   }),
 });
 

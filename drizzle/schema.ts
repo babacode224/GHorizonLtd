@@ -30,8 +30,10 @@ export const users = mysqlTable("users", {
 
 export const listingKinds = ["property", "vehicle"] as const;
 export const listingStatuses = ["pending", "approved", "rejected"] as const;
-export const listingPurposes = ["sale", "rent"] as const;
+export const listingPurposes = ["sale", "rent", "lease", "let"] as const;
 export const propertyTypes = ["land", "house", "apartment", "commercial"] as const;
+export const propertyConditions = ["newly_built", "renovated", "fairly_used", "off_plan"] as const;
+export const furnishingLevels = ["unfurnished", "semi_furnished", "furnished"] as const;
 export const propertyTitleTypes = [
   "certificate_of_occupancy",
   "gazette",
@@ -71,10 +73,25 @@ export const listings = mysqlTable(
     propertyType: mysqlEnum("propertyType", propertyTypes),
     propertyTitleType: mysqlEnum("propertyTitleType", propertyTitleTypes),
     landmarks: text("landmarks"),
+    estateName: varchar("estateName", { length: 180 }),
+    propertyCondition: mysqlEnum("propertyCondition", propertyConditions),
+    furnishing: mysqlEnum("furnishing", furnishingLevels),
     sizeSqm: decimal("sizeSqm", { precision: 14, scale: 2 }),
     bedrooms: int("bedrooms"),
     bathrooms: int("bathrooms"),
+    toilets: int("toilets"),
+    parkingSpaces: int("parkingSpaces"),
+    floorNumber: int("floorNumber"),
+    totalFloors: int("totalFloors"),
+    yearBuilt: int("yearBuilt"),
     rentPeriod: mysqlEnum("rentPeriod", ["month", "year"]),
+    minimumLeaseMonths: int("minimumLeaseMonths"),
+    availableFrom: timestamp("availableFrom"),
+    serviceCharge: decimal("serviceCharge", { precision: 18, scale: 2 }),
+    securityDeposit: decimal("securityDeposit", { precision: 18, scale: 2 }),
+    agencyFee: decimal("agencyFee", { precision: 18, scale: 2 }),
+    legalFee: decimal("legalFee", { precision: 18, scale: 2 }),
+    cautionFee: decimal("cautionFee", { precision: 18, scale: 2 }),
     features: text("features"),
 
     make: varchar("make", { length: 80 }),

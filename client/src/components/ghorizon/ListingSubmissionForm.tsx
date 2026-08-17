@@ -36,8 +36,8 @@ function fileToUpload(file: File): Promise<Upload> {
   });
 }
 
-export function ListingSubmissionForm({ adminMode = false }: { adminMode?: boolean }) {
-  const [kind, setKind] = useState<Kind | null>(null);
+export function ListingSubmissionForm({ adminMode = false, propertyOnly = false, onPublished }: { adminMode?: boolean; propertyOnly?: boolean; onPublished?: () => void }) {
+  const [kind, setKind] = useState<Kind | null>(propertyOnly ? "property" : null);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const submit = trpc.listings.submit.useMutation({
@@ -45,7 +45,7 @@ export function ListingSubmissionForm({ adminMode = false }: { adminMode?: boole
     onError: (cause) => setError(cause.message),
   });
   const adminSubmit = trpc.admin.directCreate.useMutation({
-    onSuccess: () => setSubmitted(true),
+    onSuccess: () => { setSubmitted(true); onPublished?.(); },
     onError: (cause) => setError(cause.message),
   });
 
@@ -57,7 +57,7 @@ export function ListingSubmissionForm({ adminMode = false }: { adminMode?: boole
         <p className="mx-auto mt-3 max-w-lg leading-7 text-slate-600">
           {adminMode ? "This listing has been published directly by an administrator." : <>Your listing is securely stored as <strong>Pending Review</strong>. It remains private until a G Horizon administrator verifies and approves it.</>}
         </p>
-        <button onClick={() => { setKind(null); setSubmitted(false); }} className="mt-7 bg-[#1e3a8a] px-5 py-3 text-sm font-semibold text-white">
+          <button onClick={() => { setKind(propertyOnly ? "property" : null); setSubmitted(false); }} className="mt-7 bg-[#1e3a8a] px-5 py-3 text-sm font-semibold text-white">
           Submit another listing
         </button>
       </div>
@@ -81,14 +81,14 @@ export function ListingSubmissionForm({ adminMode = false }: { adminMode?: boole
     );
   }
 
-  return <ListingForm kind={kind} submitting={submit.isPending || adminSubmit.isPending} adminMode={adminMode} error={error} onBack={() => setKind(null)} onSubmit={(payload) => { setError(null); if (adminMode) adminSubmit.mutate({ listing: payload as never, featured: false }); else submit.mutate(payload as never); }} />;
+  return <ListingForm kind={kind} submitting={submit.isPending || adminSubmit.isPending} adminMode={adminMode} error={error} onBack={() => setKind(propertyOnly ? "property" : null)} onSubmit={(payload, featured) => { setError(null); if (adminMode) adminSubmit.mutate({ listing: payload as never, featured }); else submit.mutate(payload as never); }} />;
 }
 
 function ChoiceCard({ title, text, onClick }: { title: string; text: string; onClick: () => void }) {
   return <button onClick={onClick} className="group border border-slate-200 bg-white p-8 text-left transition hover:-translate-y-1 hover:border-[#3b82f6] hover:shadow-xl"><p className="font-display text-3xl text-[#0c1f52]">{title}</p><p className="mt-3 leading-7 text-slate-500">{text}</p><span className="mt-6 inline-flex items-center gap-2 font-semibold text-[#1e3a8a]">Choose {title.toLowerCase()} <ChevronRight className="h-4 w-4" /></span></button>;
 }
 
-function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: { kind: Kind; submitting: boolean; adminMode: boolean; error: string | null; onBack: () => void; onSubmit: (value: unknown) => void }) {
+function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: { kind: Kind; submitting: boolean; adminMode: boolean; error: string | null; onBack: () => void; onSubmit: (value: unknown, featured: boolean) => void }) {
   const [images, setImages] = useState<Upload[]>([]);
   const [documents, setDocuments] = useState<Upload[]>([]);
   const [clearingPaper, setClearingPaper] = useState<Upload | undefined>();
@@ -131,10 +131,25 @@ function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: {
       propertyType: String(data.get("propertyType")),
       propertyTitleType: String(data.get("propertyTitleType")),
       landmarks: String(data.get("landmarks") ?? ""),
+      estateName: String(data.get("estateName") ?? ""),
+      propertyCondition: String(data.get("propertyCondition") ?? "") || undefined,
+      furnishing: String(data.get("furnishing") ?? "") || undefined,
       sizeSqm: data.get("sizeSqm") ? Number(data.get("sizeSqm")) : undefined,
       bedrooms: data.get("bedrooms") ? Number(data.get("bedrooms")) : undefined,
       bathrooms: data.get("bathrooms") ? Number(data.get("bathrooms")) : undefined,
+      toilets: data.get("toilets") ? Number(data.get("toilets")) : undefined,
+      parkingSpaces: data.get("parkingSpaces") ? Number(data.get("parkingSpaces")) : undefined,
+      floorNumber: data.get("floorNumber") ? Number(data.get("floorNumber")) : undefined,
+      totalFloors: data.get("totalFloors") ? Number(data.get("totalFloors")) : undefined,
+      yearBuilt: data.get("yearBuilt") ? Number(data.get("yearBuilt")) : undefined,
       rentPeriod: data.get("rentPeriod") || undefined,
+      minimumLeaseMonths: data.get("minimumLeaseMonths") ? Number(data.get("minimumLeaseMonths")) : undefined,
+      availableFrom: data.get("availableFrom") ? new Date(String(data.get("availableFrom"))) : undefined,
+      serviceCharge: data.get("serviceCharge") ? Number(data.get("serviceCharge")) : undefined,
+      securityDeposit: data.get("securityDeposit") ? Number(data.get("securityDeposit")) : undefined,
+      agencyFee: data.get("agencyFee") ? Number(data.get("agencyFee")) : undefined,
+      legalFee: data.get("legalFee") ? Number(data.get("legalFee")) : undefined,
+      cautionFee: data.get("cautionFee") ? Number(data.get("cautionFee")) : undefined,
       features: String(data.get("features") ?? "").split("\n").map((value) => value.trim()).filter(Boolean),
     };
     const vehiclePayload = {
@@ -151,7 +166,7 @@ function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: {
       conditionScore: data.get("conditionScore") ? Number(data.get("conditionScore")) : undefined,
       clearingPaper,
     };
-    onSubmit(kind === "property" ? propertyPayload : vehiclePayload);
+    onSubmit(kind === "property" ? propertyPayload : vehiclePayload, data.get("featured") === "on");
   }
 
   return (
@@ -176,16 +191,16 @@ function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: {
             <Field label="Price (₦)" type="number" name="price" min="0" required className={field} labelClass={labelClass} />
             <Field label="Location" name="location" required className={field} labelClass={labelClass} />
             <Field label="City" name="city" className={field} labelClass={labelClass} />
-            <Select label="Purpose" name="purpose" className={field} labelClass={labelClass} options={[["sale", "For Sale"], ["rent", "For Rent"]]} />
+            <Select label="Listing purpose" name="purpose" className={field} labelClass={labelClass} options={[["sale", "For Sale"], ["rent", "For Rent"], ["let", "To Let"], ["lease", "For Lease"]]} />
             {kind === "property" ? <PropertyFields field={field} labelClass={labelClass} /> : <VehicleFields field={field} labelClass={labelClass} />}
           </div>
           <div className="mt-4"><label className={labelClass}>Description</label><textarea name="description" rows={5} className={field} placeholder="Share the important details of this listing." /></div>
-          {kind === "property" && <div className="mt-4"><label className={labelClass}>Features (one per line)</label><textarea name="features" rows={4} className={field} placeholder={"24/7 security\nFitted kitchen\nBackup power"} /></div>}
-          <div className="mt-4"><Field label="YouTube tour URL" name="youtubeUrl" type="url" className={field} labelClass={labelClass} /></div>
+          {kind === "property" && <div className="mt-4"><label className={labelClass}>Features & amenities (one per line)</label><textarea name="features" rows={5} className={field} placeholder={"24/7 security\nFitted kitchen\nBackup power\nSwimming pool\nWater treatment plant"} /></div>}
+          <div className="mt-4"><Field label="YouTube video tour URL" name="youtubeUrl" type="url" className={field} labelClass={labelClass} /><p className="mt-1 text-xs text-slate-500">Paste the public YouTube URL. The video will be shown above the photo gallery on the public property page.</p></div>
         </section>
         <section className="mt-10 border-t border-slate-100 pt-8">
           <p className="font-display text-2xl text-[#0c1f52]">Evidence & photographs</p>
-          <p className="mt-2 text-sm text-slate-500">Upload PDF, JPG, PNG, or WEBP files up to 10 MB each.</p>
+          <p className="mt-2 text-sm text-slate-500">Upload up to 10 professional JPG, PNG or WEBP images. Photos appear below the YouTube tour when a public video URL is provided. Supporting PDF documents remain private.</p>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             <UploadBlock label="Listing photos" multiple accept="image/jpeg,image/png,image/webp" names={images.map((file) => file.fileName)} onFiles={(files) => addFiles(files, "images")} />
             <UploadBlock label="Supporting documents" multiple accept="application/pdf,image/jpeg,image/png,image/webp" names={documents.map((file) => file.fileName)} onFiles={(files) => addFiles(files, "documents")} />
@@ -194,7 +209,8 @@ function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: {
         </section>
         {error && <p className="mt-6 border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>}
         <div className="mt-9 flex items-center justify-between gap-4 border-t border-slate-100 pt-6">
-          <span className="flex max-w-sm items-center gap-2 text-xs leading-5 text-slate-500"><ShieldCheck className="h-4 w-4 shrink-0 text-[#c9a24b]" />{adminMode ? "Your administrator role allows this listing to publish directly." : "Public submissions always remain Pending Review until verified by an administrator."}</span>
+          <span className="flex max-w-sm items-center gap-2 text-xs leading-5 text-slate-500"><ShieldCheck className="h-4 w-4 shrink-0 text-[#c9a24b]" />{adminMode ? "This direct property-manager workspace publishes listings immediately. Check every detail before publishing." : "Public submissions always remain Pending Review until verified by an administrator."}</span>
+          {adminMode && <label className="mr-auto flex items-center gap-2 text-xs font-bold text-[#1e3a8a]"><input name="featured" type="checkbox" className="accent-[#1e3a8a]" />Feature on homepage</label>}
           <button disabled={submitting} className="inline-flex shrink-0 items-center gap-2 bg-[#1e3a8a] px-5 py-3 text-sm font-semibold text-white disabled:opacity-60">{submitting && <Loader2 className="h-4 w-4 animate-spin" />}{submitting ? "Publishing…" : adminMode ? "Publish Listing" : "Submit for Review"}</button>
         </div>
       </div>
@@ -203,7 +219,7 @@ function ListingForm({ kind, submitting, adminMode, error, onBack, onSubmit }: {
 }
 
 function PropertyFields({ field, labelClass }: { field: string; labelClass: string }) {
-  return <><Select label="Property type" name="propertyType" className={field} labelClass={labelClass} options={[["house", "House"], ["land", "Land Plot"], ["apartment", "Apartment"], ["commercial", "Commercial"]]} /><Select label="Title type" name="propertyTitleType" className={field} labelClass={labelClass} options={[["certificate_of_occupancy", "C of O"], ["gazette", "Gazette"], ["survey_plan", "Survey Plan"], ["deed_of_assignment", "Deed of Assignment"], ["governors_consent", "Governor's Consent"]]} /><Field label="Landmarks" name="landmarks" className={field} labelClass={labelClass} /><Field label="Size (m²)" type="number" name="sizeSqm" min="0" className={field} labelClass={labelClass} /><Field label="Bedrooms" type="number" name="bedrooms" min="0" className={field} labelClass={labelClass} /><Field label="Bathrooms" type="number" name="bathrooms" min="0" className={field} labelClass={labelClass} /><Select label="Rent period" name="rentPeriod" className={field} labelClass={labelClass} options={[["", "Not applicable"], ["year", "Per year"], ["month", "Per month"]]} /></>;
+  return <><Select label="Property type" name="propertyType" className={field} labelClass={labelClass} options={[["house", "House"], ["land", "Land Plot"], ["apartment", "Apartment"], ["commercial", "Commercial"]]} /><Select label="Title type" name="propertyTitleType" className={field} labelClass={labelClass} options={[["certificate_of_occupancy", "C of O"], ["gazette", "Gazette"], ["survey_plan", "Survey Plan"], ["deed_of_assignment", "Deed of Assignment"], ["governors_consent", "Governor's Consent"]]} /><Field label="Estate / development" name="estateName" className={field} labelClass={labelClass} /><Field label="Landmarks" name="landmarks" className={field} labelClass={labelClass} /><Select label="Property condition" name="propertyCondition" className={field} labelClass={labelClass} options={[["", "Not specified"], ["newly_built", "Newly built"], ["renovated", "Renovated"], ["fairly_used", "Fairly used"], ["off_plan", "Off-plan"]]} /><Select label="Furnishing" name="furnishing" className={field} labelClass={labelClass} options={[["", "Not specified"], ["unfurnished", "Unfurnished"], ["semi_furnished", "Semi-furnished"], ["furnished", "Furnished"]]} /><Field label="Size (m²)" type="number" name="sizeSqm" min="0" className={field} labelClass={labelClass} /><Field label="Year built" type="number" name="yearBuilt" min="1800" max="2100" className={field} labelClass={labelClass} /><Field label="Bedrooms" type="number" name="bedrooms" min="0" className={field} labelClass={labelClass} /><Field label="Bathrooms" type="number" name="bathrooms" min="0" className={field} labelClass={labelClass} /><Field label="Toilets" type="number" name="toilets" min="0" className={field} labelClass={labelClass} /><Field label="Parking spaces" type="number" name="parkingSpaces" min="0" className={field} labelClass={labelClass} /><Field label="Floor number" type="number" name="floorNumber" min="0" className={field} labelClass={labelClass} /><Field label="Total floors" type="number" name="totalFloors" min="0" className={field} labelClass={labelClass} /><Select label="Payment period" name="rentPeriod" className={field} labelClass={labelClass} options={[["", "Not applicable"], ["year", "Per year"], ["month", "Per month"]]} /><Field label="Minimum lease (months)" type="number" name="minimumLeaseMonths" min="1" className={field} labelClass={labelClass} /><Field label="Available from" type="date" name="availableFrom" className={field} labelClass={labelClass} /><Field label="Service charge (₦)" type="number" name="serviceCharge" min="0" className={field} labelClass={labelClass} /><Field label="Security deposit (₦)" type="number" name="securityDeposit" min="0" className={field} labelClass={labelClass} /><Field label="Agency fee (₦)" type="number" name="agencyFee" min="0" className={field} labelClass={labelClass} /><Field label="Legal fee (₦)" type="number" name="legalFee" min="0" className={field} labelClass={labelClass} /><Field label="Caution fee (₦)" type="number" name="cautionFee" min="0" className={field} labelClass={labelClass} /></>;
 }
 
 function VehicleFields({ field, labelClass }: { field: string; labelClass: string }) {

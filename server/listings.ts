@@ -27,16 +27,31 @@ export type CreateListingInput = {
   price: number;
   location: string;
   city?: string | null;
-  purpose?: "sale" | "rent" | null;
+  purpose?: "sale" | "rent" | "lease" | "let" | null;
   featured?: boolean;
   youtubeUrl?: string | null;
   propertyType?: "land" | "house" | "apartment" | "commercial" | null;
   propertyTitleType?: "certificate_of_occupancy" | "gazette" | "survey_plan" | "deed_of_assignment" | "governors_consent" | null;
   landmarks?: string | null;
+  estateName?: string | null;
+  propertyCondition?: "newly_built" | "renovated" | "fairly_used" | "off_plan" | null;
+  furnishing?: "unfurnished" | "semi_furnished" | "furnished" | null;
   sizeSqm?: number | null;
   bedrooms?: number | null;
   bathrooms?: number | null;
+  toilets?: number | null;
+  parkingSpaces?: number | null;
+  floorNumber?: number | null;
+  totalFloors?: number | null;
+  yearBuilt?: number | null;
   rentPeriod?: "month" | "year" | null;
+  minimumLeaseMonths?: number | null;
+  availableFrom?: Date | null;
+  serviceCharge?: number | null;
+  securityDeposit?: number | null;
+  agencyFee?: number | null;
+  legalFee?: number | null;
+  cautionFee?: number | null;
   features?: string[];
   make?: string | null;
   model?: string | null;
@@ -54,7 +69,7 @@ export type CreateListingInput = {
 
 export type ListingFilters = {
   kind: "property" | "vehicle";
-  purpose?: "sale" | "rent";
+  purpose?: "sale" | "rent" | "lease" | "let";
   propertyType?: "land" | "house" | "apartment" | "commercial";
   city?: string;
   minPrice?: number;
@@ -143,7 +158,15 @@ export async function listPublicListings(filters: ListingFilters) {
   const rows = await db.select().from(listings).where(and(...conditions)).orderBy(desc(listings.featured), desc(listings.createdAt));
   const managedListings = await attachImages(rows);
   if (filters.kind !== "property") return managedListings;
-  return [...managedListings, ...filterSourceProperties(filters)];
+  if (filters.purpose === "lease" || filters.purpose === "let") return managedListings;
+  return [...managedListings, ...filterSourceProperties({
+    purpose: filters.purpose,
+    propertyType: filters.propertyType,
+    city: filters.city,
+    minPrice: filters.minPrice,
+    maxPrice: filters.maxPrice,
+    query: filters.query,
+  })];
 }
 
 export async function getPublicListingBySlug(kind: "property" | "vehicle", slug: string) {
@@ -207,10 +230,25 @@ export async function createListing(input: CreateListingInput, actorUserId: numb
     propertyType: input.propertyType ?? null,
     propertyTitleType: input.propertyTitleType ?? null,
     landmarks: nullable(input.landmarks),
+    estateName: nullable(input.estateName),
+    propertyCondition: input.propertyCondition ?? null,
+    furnishing: input.furnishing ?? null,
     sizeSqm: input.sizeSqm === null || input.sizeSqm === undefined ? null : String(input.sizeSqm),
     bedrooms: input.bedrooms ?? null,
     bathrooms: input.bathrooms ?? null,
+    toilets: input.toilets ?? null,
+    parkingSpaces: input.parkingSpaces ?? null,
+    floorNumber: input.floorNumber ?? null,
+    totalFloors: input.totalFloors ?? null,
+    yearBuilt: input.yearBuilt ?? null,
     rentPeriod: input.rentPeriod ?? null,
+    minimumLeaseMonths: input.minimumLeaseMonths ?? null,
+    availableFrom: input.availableFrom ?? null,
+    serviceCharge: input.serviceCharge === null || input.serviceCharge === undefined ? null : String(input.serviceCharge),
+    securityDeposit: input.securityDeposit === null || input.securityDeposit === undefined ? null : String(input.securityDeposit),
+    agencyFee: input.agencyFee === null || input.agencyFee === undefined ? null : String(input.agencyFee),
+    legalFee: input.legalFee === null || input.legalFee === undefined ? null : String(input.legalFee),
+    cautionFee: input.cautionFee === null || input.cautionFee === undefined ? null : String(input.cautionFee),
     features: input.features?.length ? JSON.stringify(input.features) : null,
     make: nullable(input.make),
     model: nullable(input.model),
@@ -273,7 +311,7 @@ export async function createListing(input: CreateListingInput, actorUserId: numb
 
 export async function approveListing(
   id: number,
-  actorUserId: number,
+  actorUserId: number | null,
   changes: { adminTitle?: string; adminDescription?: string; adminPrice?: number; adminNotes?: string; featured?: boolean },
 ) {
   const db = await getDb();
@@ -305,7 +343,7 @@ export async function approveListing(
   return getAdminListing(id);
 }
 
-export async function rejectListing(id: number, actorUserId: number, reason: string) {
+export async function rejectListing(id: number, actorUserId: number | null, reason: string) {
   const db = await getDb();
   if (!db) throw new Error("Database unavailable");
   const [existing] = await db.select().from(listings).where(eq(listings.id, id)).limit(1);
@@ -324,7 +362,7 @@ export async function rejectListing(id: number, actorUserId: number, reason: str
   });
 }
 
-export async function deleteListing(id: number, actorUserId: number) {
+export async function deleteListing(id: number, actorUserId: number | null) {
   const db = await getDb();
   if (!db) throw new Error("Database unavailable");
   const [existing] = await db.select().from(listings).where(eq(listings.id, id)).limit(1);

@@ -30,3 +30,10 @@
 - [x] Replace the placeholder leadership names with Frank Friday, Taiwo Adegoke, and Tope Akpene.
 - [x] Verify the named leadership profiles and save an updated checkpoint.
 - [x] Remove the Lead Consultant card so the leadership section contains only the three designated profiles.
+- [x] Audit the current admin, listing data, and public media-detail implementation.
+- [x] Remove administrator authentication requirements for direct access to `/admin` and its property-management operations.
+- [x] Add comprehensive property fields for sale, rent, letting, and lease listings.
+- [x] Redesign `/admin` as a detailed property-management workspace with listing review, editing, media uploads, and direct publishing.
+- [x] Add YouTube property-video handling with video-first playback and image gallery presentation on public listing detail pages.
+- [x] Validate direct admin creation, property media uploads, video links, and public detail rendering.
+- [x] Verify direct admin creation with stored image media and a YouTube URL, confirm video-first public rendering, and remove the temporary validation record.
